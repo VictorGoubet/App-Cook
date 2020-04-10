@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Cook.View.Panier"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Cook.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="700"
+             Loaded="UserControl_Loaded">
+    <Grid>
+        <TextBlock Text="Recapitulatif" FontSize="25" FontFamily="Helvetica" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+        <Grid  VerticalAlignment="Top" Width="500"  Margin="0 50 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="300*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <Border Background="#bfaae6"  Height="20" Margin=" 0 0 0 10" CornerRadius="8 8 0 0" VerticalAlignment="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Plat" FontSize="15" VerticalAlignment="Center"  Foreground="White" FontFamily="Helvetica" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Prix" Grid.Column="1" FontSize="15" VerticalAlignment="Center"  Foreground="White" FontFamily="Helvetica" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Quantité" Grid.ColumnSpan="2"  FontSize="15" Grid.Column="2" VerticalAlignment="Center"  Foreground="White" FontFamily="Helvetica" HorizontalAlignment="Left"/>
+                </Grid>
+            </Border>
+
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" VerticalAlignment="Bottom" Width="500" Grid.Row="1">
+                <StackPanel x:Name="Stck_Rcp" HorizontalAlignment="Center"  Orientation="Vertical"/>
+
+            </ScrollViewer>
+
+        </Grid>
+
+        <Grid Height="50" VerticalAlignment="Bottom">
+            <TextBlock x:Name="PrxTT" Text="Total : 0 Ck" FontSize="25" FontFamily="Helvetica" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100 0 0 0"/>
+
+            <Button x:Name="Btn_ValPanier" Width="40" Height="40" Template="{DynamicResource BtnNav}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 200 0" Click="Btn_ValPanier_Click">
+                <materialDesign:PackIcon Kind="Check" Width="40" Height="40"  Foreground="#bfaae6" VerticalAlignment="Center"/>
+            </Button>
+
+            <Button x:Name="Btn_DelPanier" Width="40" Height="40" Template="{DynamicResource BtnNav}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 100 0" Click="Btn_DelPanier_Click">
+                <materialDesign:PackIcon Kind="Bin" Width="40" Height="40"  Foreground="#bfaae6" VerticalAlignment="Center"/>
+            </Button>
+
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>

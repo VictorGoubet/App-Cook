@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Cook.View.DetailRecette"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Cook.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             Loaded="UserControl_Loaded">
+
+    <Border CornerRadius="5" Background="White">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Opacity="0.1" Direction="260"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Border  Grid.Column="1" CornerRadius="8" BorderThickness="0" Margin="10">
+                <Border.Background>
+                    <ImageBrush x:Name="ImgRct"/>
+                </Border.Background>
+                
+            </Border>
+            
+            
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="Type_Rct" Margin="50 5 5 5"  FontSize="15" VerticalAlignment="Center" Foreground="#bfaae6" FontFamily="Helvetica" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="Prix" Margin="50 5 5 5"  FontSize="15" VerticalAlignment="Center" Foreground="#bfaae6" FontFamily="Helvetica" HorizontalAlignment="Left" Grid.Row="1"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="Titre" Margin="5"  FontSize="20" VerticalAlignment="Center" Foreground="#bfaae6" FontFamily="Helvetica" HorizontalAlignment="Center" />
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    
+                    <TextBlock x:Name="Description"  TextWrapping="Wrap"  FontSize="15" FontFamily="Helvetica" />
+                </ScrollViewer>
+                
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Border Height="1" Opacity="0.8" BorderBrush="#bfaae6" BorderThickness="1" Margin="10 0 10 0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                <StackPanel x:Name="Prdt" Margin="0 0 0 20"  VerticalAlignment="Bottom"  HorizontalAlignment="Center" />
+                <StackPanel x:Name="Qt_Prdt" Margin="0 0 0 20"  VerticalAlignment="Bottom"  HorizontalAlignment="Left" Grid.Column="1" />
+                
+            </Grid>
+            
+            <Button Grid.Row="1" x:Name="del" Grid.Column="1" Margin="0 0 10 10"  HorizontalAlignment="Right" Width="50" Height="50" VerticalAlignment="Bottom" Click="del_Click"  Template="{DynamicResource BtnNav}">
+                <materialDesign:PackIcon Kind="Bin" Width="40" Height="40" Foreground="#FFBFAAE6"/>
+            </Button>
+
+        </Grid>
+    </Border>
+
+</UserControl>
