@@ -23,7 +23,9 @@
 
                 <Button x:Name="Btn_Login" Template="{StaticResource BtnRond}" Content="Login" Width="150" Height="40" FontFamily="helvetica" FontSize="20"  Margin="10" Opacity="0.8" Click="Login_Click"/>
                 <Button x:Name="Btn_Register" Template="{StaticResource BtnRond}" Content="Register" Width="150" Height="40" FontFamily="helvetica" FontSize="20"  Margin="10" Opacity="0.8" Click="Register_Click"/>
+                
             </WrapPanel>
+            <Button x:Name="Btn_Test" Template="{StaticResource BtnRond}" VerticalAlignment="Bottom" Content="Mode Test" Width="150" Height="40" FontFamily="helvetica" FontSize="20"  Margin="40" Opacity="0.8" Click="Btn_Test_Click"/>
 
         </Grid>
     </Border>

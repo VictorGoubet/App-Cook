@@ -40,5 +40,10 @@ namespace Cook.View
             //On charge le controle d'inscription
             Application.Current.MainWindow.DataContext = new Register();
         }
+
+        private void Btn_Test_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
