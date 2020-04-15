@@ -46,6 +46,7 @@ namespace Cook.View
 
         private void next_Click(object sender, RoutedEventArgs e)
         {
+            //On va appeler l'affichage relié à l'indexe i
             if (index < 5)
             {
                 index++;
@@ -58,7 +59,9 @@ namespace Cook.View
 
         private void previous_Click(object sender, RoutedEventArgs e)
         {
-            if (index > 0)
+
+            //On va appeler l'affichage relié à l'indexe i
+            if (index > 1)
             {
                 index--;
                 Affichage(index);
@@ -97,12 +100,17 @@ namespace Cook.View
 
         }
 
+
+        //Ici on définit les 5 affichages possibles :
+
         private void Affichage1()
         {
             //THOMAS : Il faut ici récupérer le nombre n de client
 
             int n = 221;
             TextBlock t = new TextBlock();
+            t.Foreground = Brushes.Black;
+            t.FontWeight = FontWeights.Bold;
             t.Text = "Nombre de client : "+n.ToString();
             viewer.Children.Add(t);
 
@@ -113,6 +121,8 @@ namespace Cook.View
 
             int n = 0;
             TextBlock t = new TextBlock();
+            t.Foreground = Brushes.Black;
+            t.FontWeight = FontWeights.Bold;
             t.Text = "Nombre de CDR : " + n.ToString()+"\n";
             viewer.Children.Add(t);
 
@@ -139,6 +149,8 @@ namespace Cook.View
 
             int n = 52;
             TextBlock t = new TextBlock();
+            t.Foreground = Brushes.Black;
+            t.FontWeight = FontWeights.Bold;
             t.Text = "Nombre de recette : " + n.ToString();
             viewer.Children.Add(t);
 
@@ -146,6 +158,8 @@ namespace Cook.View
         private void Affichage4()
         {
             TextBlock t = new TextBlock();
+            t.Foreground = Brushes.Black;
+            t.FontWeight = FontWeights.Bold;
             t.Text = "Liste des produits ayant une quantité en stock inférieure ou égale \n à deux fois leur quantité minimale : \n";
             viewer.Children.Add(t);
 
@@ -195,7 +209,9 @@ namespace Cook.View
 
                 TextBlock prdt= new TextBlock();
                 prdt.Text = "\nIngrédient : "+ nomIngredient+"\n";
-                
+                prdt.Foreground = Brushes.Black;
+                prdt.FontWeight = FontWeights.Bold;
+
                 viewer.Children.Add(prdt);
 
                 if (Nom_Recette.Count() > 0)
