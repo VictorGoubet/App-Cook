@@ -105,6 +105,9 @@
     <Compile Include="View\DelRct.xaml.cs">
       <DependentUpon>DelRct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DemoPage.xaml.cs">
+      <DependentUpon>DemoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DetailRecette.xaml.cs">
       <DependentUpon>DetailRecette.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DelRct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DemoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

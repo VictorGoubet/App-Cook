@@ -43,7 +43,11 @@ namespace Cook.View
 
         private void Btn_Test_Click(object sender, RoutedEventArgs e)
         {
+            //On charge le mode Demo
+            Application.Current.MainWindow.DataContext = new DemoPage();
 
         }
+
+
     }
 }
