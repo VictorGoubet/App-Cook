@@ -113,7 +113,7 @@ namespace Cook.View
 
             int n = 0;
             TextBlock t = new TextBlock();
-            t.Text = "Nombre de CDR : " + n.ToString();
+            t.Text = "Nombre de CDR : " + n.ToString()+"\n";
             viewer.Children.Add(t);
 
             //THOMAS : On récupére la liste des noms des CDR et pour chacun leurs nombre de recette commandées
@@ -123,7 +123,7 @@ namespace Cook.View
             for(int k = 0; k < Liste_nb.Count(); k++)
             {
                 TextBlock t2 = new TextBlock();
-                t2.Text = Liste_Nom[k]+" | "+Liste_nb[k]+" recettes";
+                t2.Text = Liste_Nom[k]+" : "+Liste_nb[k]+" recettes";
                 viewer.Children.Add(t2);
 
             }
@@ -145,15 +145,20 @@ namespace Cook.View
         }
         private void Affichage4()
         {
-            //THOMAS : Il faut ici récupérer la Liste des produits ayant une quantité en stock <= 2 * leur quantité minimale
+            TextBlock t = new TextBlock();
+            t.Text = "Liste des produits ayant une quantité en stock inférieure ou égale \n à deux fois leur quantité minimale : \n";
+            viewer.Children.Add(t);
+
+
+            //THOMAS : Il faut ici récupérer la 
 
             List<string> Liste_prdt = new List<string> { "Farine", "Oeuf", "Boeuf", "Salade", "Mais", "Jambon", "Farine", "Oeuf", "Boeuf", "Salade", "Mais", "Jambon" };
 
             foreach(string elem in Liste_prdt)
             {
-                TextBlock t = new TextBlock();
-                t.Text = elem;
-                viewer.Children.Add(t);
+                TextBlock t2 = new TextBlock();
+                t2.Text = elem;
+                viewer.Children.Add(t2);
             }
             
 
@@ -178,17 +183,39 @@ namespace Cook.View
 
             if (e.Key == Key.Enter)
             {
+                
                 string nomIngredient = (sender as TextBox).Text;
-                //THOMAS : Il faut ici récupérer la Liste des recettes utilisant le produit recherché et également prendre sa quantité dans cette recette
+                viewer.Children.Clear();
+                Affichage5();
+
+                //THOMAS : Il faut ici récupérer la Liste des recettes utilisant le produit recherché et également prendre sa quantité dans cette recette et l'unité associé au produit
+                string unite = "kg";
                 List<string> Nom_Recette = new List<string> { "Burger", "Poule au riz" };
                 List<double> Qt = new List<double> {14.5, 25};
 
-                for(int k = 0; k < Nom_Recette.Count(); k++)
+                TextBlock prdt= new TextBlock();
+                prdt.Text = "\nIngrédient : "+ nomIngredient+"\n";
+                
+                viewer.Children.Add(prdt);
+
+                if (Nom_Recette.Count() > 0)
+                {
+                    for (int k = 0; k < Nom_Recette.Count(); k++)
+                    {
+                        TextBlock t = new TextBlock();
+                        t.Text = Nom_Recette[k] + " : " + Qt[k] + unite;
+                        viewer.Children.Add(t);
+                    }
+
+                }
+                else
                 {
                     TextBlock t = new TextBlock();
-                    t.Text = Nom_Recette[k]+" : "+Qt[k];
+                    t.Text = "Oops, il semblerait que ce produit est utilisé dans aucunes recettes !";
                     viewer.Children.Add(t);
                 }
+
+                
                 
             }
             
