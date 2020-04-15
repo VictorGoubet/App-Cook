@@ -160,7 +160,7 @@ namespace Cook.View
             TextBlock t = new TextBlock();
             t.Foreground = Brushes.Black;
             t.FontWeight = FontWeights.Bold;
-            t.Text = "Liste des produits ayant une quantité en stock inférieure ou égale \n à deux fois leur quantité minimale : \n";
+            t.Text = "Liste des produits ayant une quantité en stock inférieure ou\négale à deux fois leur quantité minimale : \n";
             viewer.Children.Add(t);
 
 
