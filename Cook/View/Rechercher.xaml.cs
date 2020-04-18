@@ -43,10 +43,11 @@ namespace Cook.View
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //On récupére les données des differentes recettes: 
-            //THOMAS (j'ai fait un exemple avec la bdd sakila ici )
+            //THOMAS (j'ai fait un exemple avec la bdd sakila ici (je l'ai commenté pour pas avoir d'erreure si tu n'a pas la bdd sakila)
+
 
             #region Ouverture de connexion
-
+            /*
             MySqlConnection maConnexion = null;
             try
             {
@@ -82,7 +83,10 @@ namespace Cook.View
             }
             reader.Close();
             command1.Dispose();
+            */
             #endregion
+
+            
 
             //On stock les données sous cette forme :
             List<string> urlListe = new List<string> { "https://cache.marieclaire.fr/data/photo/w1000_c17/cuisine/4r/tartiflette-express-au-reblochon-1.jpg", "https://i.pinimg.com/originals/78/90/3d/78903d8a71699d0e5ad2fc6a27ca8191.jpg", "https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2020.2F02.2F13.2Ff5f778dd-ad0a-421b-a35d-bad4e518a612.2Ejpeg/750x562/quality/80/crop-from/center/cr/wqkgR2luZXQtRHJpbiAvIFBob3RvY3Vpc2luZSAvIEN1aXNpbmUgQWN0dWVsbGU%3D/la-poule-au-riz-de-la-mere-michele.jpeg" };
@@ -91,7 +95,7 @@ namespace Cook.View
             List<double> PrixListe = new List<double> { 18.50, 9.80, 25.40 };
 
             //On ajoute un controle "ModelRecette" par recette
-            AffichageRct(urlListe, DescListe, titleListebis, PrixListe);
+            AffichageRct(urlListe, DescListe, TitleListe, PrixListe);
 
         }
 

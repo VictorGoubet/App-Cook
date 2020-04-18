@@ -20,44 +20,44 @@
         <StackPanel  Orientation="Vertical" Width="150" VerticalAlignment="Center"  Grid.Column="0"  >
 
             <StackPanel Margin="0 50 0 0" >
-                <TextBox x:Name="Input_Titre" Margin="2" Text="Titre"/>
+                <TextBox Style = "{StaticResource placeHolder}" x:Name="Input_Titre" Margin="2" Tag="Titre"/>
                 <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"  />
 
             </StackPanel>
 
 
             <StackPanel Margin="0 50 0 0" >
-                <TextBox Margin="2" Text="Type" x:Name="Input_Type"/>
+                <TextBox Style = "{StaticResource placeHolder}" Margin="2" Tag="Type" x:Name="Input_Type"/>
                 <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"  />
             </StackPanel>
 
             <StackPanel Margin="0 50 0 0" >
-                <TextBox Margin="2" Text="Url" x:Name="Input_Url"/>
+                <TextBox Style = "{StaticResource placeHolder}" Margin="2" Tag="Url" x:Name="Input_Url"/>
                 <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"  />
             </StackPanel>
 
             <StackPanel Margin="0 50 0 0" >
-                <TextBox Margin="2" Text="Prix" Width="50" HorizontalAlignment="Left" x:Name="Input_Prix"/>
+                <TextBox Style = "{StaticResource placeHolder}" Margin="2" Tag="Prix" Width="50" HorizontalAlignment="Left" x:Name="Input_Prix"/>
                 <Border Background="#bfaae6" Width="50" HorizontalAlignment="Left" Height="2" />
             </StackPanel>
         </StackPanel>
 
 
         <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.ColumnSpan="2" Grid.Column="1">
-            <TextBlock Text="Description :" Foreground="#bfaae6" FontSize="18" Margin="5"/>
+            <TextBlock  Text="Description :" Foreground="#bfaae6" FontSize="18" Margin="5"/>
             <Border CornerRadius="8"  Width="400" Height="100" Margin="2"  Background="White">
-                <TextBox x:Name="Input_Desc" Opacity="1" TextWrapping="Wrap" Width="390" Height="90" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+                <TextBox  x:Name="Input_Desc" Opacity="1" TextWrapping="Wrap" Width="390" Height="90" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
             </Border>
             
         </StackPanel>
         
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="30 0 0 80" >
-            <TextBox x:Name="nom_prdt" Margin="2" Text="Produit" />
+            <TextBox Style = "{StaticResource placeHolder}" x:Name="nom_prdt" Margin="2" Tag="Produit" />
             <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" Margin="0 0 40 0" />
         </StackPanel>
 
         <StackPanel VerticalAlignment="Bottom" Margin="30 0 0 80" Grid.Column="2" >
-            <TextBox Margin="2" x:Name="Qt" Text="Qt" Width="50" HorizontalAlignment="Left" />
+            <TextBox Style = "{StaticResource placeHolder}" Margin="2" x:Name="Qt" Tag="Qt" Width="50" HorizontalAlignment="Left" />
             <Border Background="#bfaae6" Width="50" HorizontalAlignment="Left" Height="2"/>
         </StackPanel>
 

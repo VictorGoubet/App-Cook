@@ -18,7 +18,7 @@
             <StackPanel Orientation="Vertical" Width="150" VerticalAlignment="Center" Margin="0 0 0 50">
 
                 <StackPanel Margin="0 50 0 0">
-                    <TextBox x:Name="IdTxtBx" Margin="2" Text="Identifiant"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="IdTxtBx" Margin="2" Tag="Identifiant"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
                 </StackPanel>
 

@@ -23,19 +23,19 @@
             <StackPanel  Orientation="Vertical" Width="150" VerticalAlignment="Center"  Grid.Column="0"  >
 
                 <StackPanel Margin="0 50 0 0" >
-                    <TextBox x:Name="NomTxtBx" Margin="2" Text="Nom"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="NomTxtBx" Margin="2" Tag="Nom"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
 
                 </StackPanel>
 
 
                 <StackPanel Margin="0 50 0 0" >
-                    <TextBox x:Name="PrenomTxtBx" Margin="2" Text="Prenom"/>
+                    <TextBox Style="{StaticResource placeHolder}"  x:Name="PrenomTxtBx" Margin="2" Tag="Prenom"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
                 </StackPanel>
 
                 <StackPanel Margin="0 50 0 0" >
-                    <TextBox x:Name="NumTelTxtBx" Margin="2" Text="Téléphone"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="NumTelTxtBx" Margin="2" Tag="Téléphone"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"/>
                 </StackPanel>
             </StackPanel>
@@ -44,17 +44,17 @@
             <StackPanel Orientation="Vertical" Width="150" VerticalAlignment="Center"  Grid.Column="1">
 
                 <StackPanel Margin="0 50 0 0" >
-                    <TextBox x:Name="AdrMailTxtBx" Margin="2" Text="Adresse Mail"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="AdrMailTxtBx" Margin="2" Tag="Adresse Mail"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
                 </StackPanel>
 
                 <StackPanel Margin="0 50 0 0" >
-                    <PasswordBox x:Name="PswrdTxtBx" Margin="2" Password="password" />
+                    <PasswordBox  x:Name="PswrdTxtBx" Margin="2" Password="password" />
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
                 </StackPanel>
 
                 <StackPanel Margin="0 50 0 0" >
-                    <TextBox x:Name="IdTxtBx" Margin="2" Text="Identifiant"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="IdTxtBx" Margin="2" Tag="Identifiant"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
                 </StackPanel>
             </StackPanel>
@@ -78,7 +78,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 40 0 0">
-                    <TextBox x:Name="AdrTxtBx" Margin="5" Text="Adresse"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="AdrTxtBx" Margin="5" Tag="Adresse"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"/>
                 </StackPanel>
                 

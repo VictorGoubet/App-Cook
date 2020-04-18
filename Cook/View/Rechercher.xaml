@@ -20,7 +20,7 @@
 
         <StackPanel Orientation="Vertical" Margin="0 50 50 0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" >
             <StackPanel Orientation="Horizontal" Width="{Binding Path=ActualWidth}" Height="25">
-                <TextBox x:Name="Search_field" VerticalAlignment="Center" Width="170" Text="Rechercher" KeyDown="Search_field_KeyDown"/>
+                <TextBox Style="{StaticResource placeHolder}" x:Name="Search_field" VerticalAlignment="Center" Width="170" Tag="Rechercher" KeyDown="Search_field_KeyDown"/>
                 <Button x:Name="Search_field_button" Width="30" Height="30" Template="{DynamicResource BtnNav}" Click="Search_field_button_Click">
                     <materialDesign:PackIcon Kind="Search" Width="20" Height="20"  Foreground="#bfaae6" Margin="5 0 0 4"/>
                 </Button>
