@@ -46,7 +46,7 @@
         <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.ColumnSpan="2" Grid.Column="1">
             <TextBlock  Text="Description :" Foreground="#bfaae6" FontSize="18" Margin="5"/>
             <Border CornerRadius="8"  Width="400" Height="100" Margin="2"  Background="White">
-                <TextBox  x:Name="Input_Desc" Opacity="1" TextWrapping="Wrap" Width="390" Height="90" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+                <TextBox Foreground="#bfaae6" AcceptsReturn="True"  x:Name="Input_Desc" Opacity="1" TextWrapping="Wrap" Width="390" Height="90" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0"/>
             </Border>
             
         </StackPanel>

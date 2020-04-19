@@ -182,7 +182,9 @@ namespace Cook.View
         {
             
             TextBox searchbox = new TextBox();
-            searchbox.Text = "Search";
+            searchbox.Tag = "Search";
+            Style style = this.FindResource("placeHolder") as Style;
+            searchbox.Style = style;
             searchbox.KeyDown += AffichageRecette5;
 
             viewer.Children.Add(searchbox);
