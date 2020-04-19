@@ -164,7 +164,7 @@ namespace Cook.View
             viewer.Children.Add(t);
 
 
-            //THOMAS : Il faut ici récupérer la 
+            //THOMAS : Il faut ici récupérer la Liste des produits ayant une quantité en stock inférieure ou égale à deux fois leur quantité minimale
 
             List<string> Liste_prdt = new List<string> { "Farine", "Oeuf", "Boeuf", "Salade", "Mais", "Jambon", "Farine", "Oeuf", "Boeuf", "Salade", "Mais", "Jambon" };
 
@@ -180,6 +180,7 @@ namespace Cook.View
         }
         private void Affichage5()
         {
+
             
             TextBox searchbox = new TextBox();
             searchbox.Tag = "Search";
