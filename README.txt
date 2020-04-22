@@ -1,1 +1,1 @@
-Toute copie pour le projet de BDD est interdite
+Projet Base de donnée - Cook - ESILV - 2020
