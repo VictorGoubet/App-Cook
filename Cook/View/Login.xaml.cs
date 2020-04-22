@@ -20,7 +20,8 @@ namespace Cook.View
     /// </summary>
     public partial class Login : UserControl
     {
-
+        static Dictionary<string, string> Gestionnaires=new Dictionary<string, string>{ {"root","123"}
+        };
 
         public Login()
         {
@@ -39,27 +40,37 @@ namespace Cook.View
         {
             /// On verifie que tout les champs sont remplis
             if(IdTxtBx.Text!="" && MdpTxtBx.Password!="")
-            {
-                //On vérifie si l'id et le mdp son correcte :
-                //THOMAS
-
-                //On affiche le bon contenue en fonction du type d'utilisateur:
-
-                ///En réalité ici il faut comparer le type d'utilisateur et non pas les id:
-                //THOMAS
-
-                if (IdTxtBx.Text == "root")
+            { 
+            
+                //On vérifie qu'on n'essaie pas de se connecter en mode gestionnaire
+               if(Gestionnaires.ContainsKey(IdTxtBx.Text) && Gestionnaires[IdTxtBx.Text] == MdpTxtBx.Password)
                 {
                     Application.Current.MainWindow.DataContext = new AccueilGestionnaire();
                 }
-                else if(IdTxtBx.Text == "cdr")
-                {
-                    Application.Current.MainWindow.DataContext = new Accueil(1);
-                }
                 else
                 {
-                    Application.Current.MainWindow.DataContext = new Accueil(0);
+                    //On vérifie si l'id et le mdp son correcte :
+                    //THOMAS
+
+                    //On affiche le bon contenue en fonction du type d'utilisateur:
+
+                    ///En réalité ici il faut comparer le type d'utilisateur et non pas les id:
+                    //THOMAS
+
+                    if (IdTxtBx.Text == "cdr")
+                    {
+                        Application.Current.MainWindow.DataContext = new Accueil(1);
+                    }
+                    else
+                    {
+                        Application.Current.MainWindow.DataContext = new Accueil(0);
+                    }
+
                 }
+
+                
+
+                
                 
 
             }
