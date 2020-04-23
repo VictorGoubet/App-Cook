@@ -52,7 +52,7 @@ namespace Cook.View
             try
             {
                 string connexionString = "SERVER=localhost;PORT=3306;" +
-                                         "DATABASE=sakila;" +
+                                         "DATABASE=Cook;" +
                                          "UID=root;PASSWORD=Pluton740@!!";
 
                 maConnexion = new MySqlConnection(connexionString);

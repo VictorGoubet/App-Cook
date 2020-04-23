@@ -54,7 +54,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 50 0 0" >
-                    <TextBox Style="{StaticResource placeHolder}" x:Name="IdTxtBx" Margin="2" Tag="Identifiant"/>
+                    <TextBox Style="{StaticResource placeHolder}" x:Name="IdTxtBx" Margin="2" Tag="Pseudo"/>
                     <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
                 </StackPanel>
             </StackPanel>
