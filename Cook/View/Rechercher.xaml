@@ -12,7 +12,7 @@
     <Grid x:Name="Search_Grid">
 
         <StackPanel Margin="50 50 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
-            <TextBlock x:Name="AdrTxtBx_Search" VerticalAlignment="Center" Width="auto" Text="34 rue Jules Verne 92300 Levallois-Perret" FontFamily="Helvetica" FontSize="15" Foreground="White"/>
+            <TextBlock x:Name="AdrTxtBx_Search" VerticalAlignment="Center" Width="auto" FontFamily="Helvetica" FontSize="15" Foreground="White"/>
             <Button x:Name="Btn_Edit_Search" Width="30" Height="30" Template="{DynamicResource BtnNav}" Click="Btn_Edit_Search_Click" >
                 <materialDesign:PackIcon Kind="Edit" Width="20" Height="20"  Foreground="#bfaae6" Margin="5 0 0 4"/>
             </Button>

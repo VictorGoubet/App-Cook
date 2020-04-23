@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
+
+
 namespace Cook.View
 {
     abstract class Tools
@@ -35,13 +37,12 @@ namespace Cook.View
         }
 
 
-        public static bool Insertion( string req, MySqlConnection c)
+        public static bool Commande( string req, MySqlConnection c)
         {
             bool res = true;
 
             MySqlCommand cmd = c.CreateCommand();
             cmd.CommandText = req;
-           
             try
             {
                 cmd.ExecuteNonQuery();

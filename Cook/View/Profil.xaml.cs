@@ -34,19 +34,40 @@ namespace Cook.View
 
             //On remplit chaque champs avec les données de la session courante : 
             NomTxtBx_Profil.Text = MainWindow.sessionCourante.Nom;
+            PrenomTxtBx_Profil.Text = MainWindow.sessionCourante.Prenom;
+            PswrdTxtBx_Profil.Password = MainWindow.sessionCourante.Mdp;
+            IdTxtBx_Profil.Text = MainWindow.sessionCourante.Pseudo;
+            AdrMailTxtBx_Profil.Text = MainWindow.sessionCourante.AdresseMail;
+            AdrTxtBx_Profil.Text = MainWindow.sessionCourante.Adresse;
+            NumTelTxtBx_Profil.Text = MainWindow.sessionCourante.NumerTel;
 
-
-            //ATTENTION : si c'est un cdr on rajoute le compteur de cook:
-
-            bool cdr = true;
-            if (cdr)
+            if (MainWindow.sessionCourante.Sexe == "M")
             {
+                RadioF_Profil.IsChecked = false;
+                RadioM_Profil.IsChecked = true;
+            }
+            else
+            {
+                RadioF_Profil.IsChecked = true;
+                RadioM_Profil.IsChecked = false;
+
+            }
+
+            if (MainWindow.sessionCourante.Cdr)
+            {
+                solde.Text = MainWindow.sessionCourante.Solde.ToString()+" Cooks";
                 solde.Visibility = Visibility.Visible;
+                CdrN_Profil.IsChecked = false;
+                CdrY_Profil.IsChecked = true;
+
             }
             else
             {
                 solde.Visibility = Visibility.Hidden;
+                CdrN_Profil.IsChecked = true;
+                CdrY_Profil.IsChecked = false;
             }
+
 
             //Ensuite on bloque la modification de tout les champs:
             SetEnable(false);
@@ -61,8 +82,6 @@ namespace Cook.View
             NomTxtBx_Profil.IsEnabled = x;
             PrenomTxtBx_Profil.IsEnabled = x;
             IdTxtBx_Profil.IsEnabled = x;
-            CdrN_Profil.IsEnabled = x;
-            CdrY_Profil.IsEnabled = x;
             RadioF_Profil.IsEnabled = x;
             RadioM_Profil.IsEnabled = x;
             PswrdTxtBx_Profil.IsEnabled = x;
@@ -97,6 +116,31 @@ namespace Cook.View
 
             //Puis on emet à jour les données de l'utilisateur avec les données modifiées:
             //THOMAS
+             MainWindow.sessionCourante.Nom= NomTxtBx_Profil.Text;
+             MainWindow.sessionCourante.Prenom= PrenomTxtBx_Profil.Text;
+             MainWindow.sessionCourante.Mdp= PswrdTxtBx_Profil.Password;
+             MainWindow.sessionCourante.Pseudo= IdTxtBx_Profil.Text;
+             MainWindow.sessionCourante.AdresseMail= AdrMailTxtBx_Profil.Text;
+             MainWindow.sessionCourante.Adresse= AdrTxtBx_Profil.Text;
+             MainWindow.sessionCourante.NumerTel= NumTelTxtBx_Profil.Text;
+
+            if (RadioF_Profil.IsChecked==true)
+            {
+                MainWindow.sessionCourante.Sexe = "F";
+            }
+            else
+            {
+                MainWindow.sessionCourante.Sexe = "M";
+
+            }
+
+            if (!MainWindow.sessionCourante.UpdateBdd())
+            {
+                MessageBox.Show("Erreure lors de la mise à jour des informations..");
+            }
+
+
+
 
         }
     }

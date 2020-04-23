@@ -54,7 +54,7 @@
             </StackPanel>
 
             <StackPanel Margin="0 50 0 0" >
-                <TextBox Style = "{StaticResource placeHolder}" x:Name="IdTxtBx_Profil" Margin="2" Tag="Identifiant"/>
+                <TextBox Style = "{StaticResource placeHolder}" x:Name="IdTxtBx_Profil" Margin="2" Tag="Pseudo"/>
                 <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
             </StackPanel>
         </StackPanel>
@@ -72,8 +72,8 @@
             <StackPanel Margin="0 40 0 0">
                 <TextBlock Text="Createur De Recette" TextAlignment="Center" FontFamily="helvetica" FontSize="15" Foreground="White"  VerticalAlignment="Center" />
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center" >
-                    <RadioButton x:Name="CdrY_Profil" Content="OUI" Margin="0 0 10 0"  Foreground="#bfaae6" Cursor="Hand" />
-                    <RadioButton x:Name="CdrN_Profil" Content="NON" Margin="10 0 0 0" IsChecked="True" Foreground="#bfaae6" Cursor="Hand"/>
+                    <RadioButton x:Name="CdrY_Profil" Content="OUI" Margin="0 0 10 0"  Foreground="#bfaae6" IsEnabled="False" />
+                    <RadioButton x:Name="CdrN_Profil" Content="NON" Margin="10 0 0 0" IsChecked="True" Foreground="#bfaae6"  IsEnabled="False"/>
                 </WrapPanel>
             </StackPanel>
 

@@ -76,6 +76,10 @@ namespace Cook.View
                         }
                         MainWindow.sessionCourante = s;
                     }
+                    else
+                    {
+                        error.Visibility = Visibility.Visible;
+                    }
 
 
                   

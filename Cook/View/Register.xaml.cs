@@ -56,7 +56,7 @@ namespace Cook.View
                 {
                     //On l'ajoute comme client : 
                     string reqCLIENT= "insert into client(NumeroTel,Nom,Prenom,Adresse,Mdp,Pseudo,AdrMail,Sexe) values('" + NumTelTxtBx.Text + "','" + NomTxtBx.Text + "','" + PrenomTxtBx.Text + "','" + AdrTxtBx.Text + "','" + PswrdTxtBx.Password + "','" + IdTxtBx.Text + "','" + AdrMailTxtBx.Text + "','" + s + "');";
-                    if (!Tools.Insertion(reqCLIENT, c))
+                    if (!Tools.Commande(reqCLIENT, c))
                     {
                         MessageBox.Show("Erreure lors de l'insertion CLIENT");
                     }
@@ -74,7 +74,7 @@ namespace Cook.View
                        
 
                         string reqCDR = "insert into cdr (Client_idClient) values(" + idClient + ");";
-                        if (!Tools.Insertion(reqCDR, c))
+                        if (!Tools.Commande(reqCDR, c))
                         {
                             MessageBox.Show("Erreure lors de l'insertion CDR ");
                         }

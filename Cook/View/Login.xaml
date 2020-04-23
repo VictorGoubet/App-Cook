@@ -26,7 +26,10 @@
                 <PasswordBox x:Name="MdpTxtBx" Margin="2" Password="password" />
                 <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" />
 
+                
+
             </StackPanel>
+            <TextBlock x:Name="error" Margin="0 150 0 0" Text="Mot de passe ou Identifiant incorect !" HorizontalAlignment="Center" Foreground="White" FontSize="15" FontFamily="Helvetica" FontStyle="Italic" VerticalAlignment="Center" Visibility="Hidden"/>
 
             <Button HorizontalAlignment="Right" Width="50" Height="50" VerticalAlignment="Top" Margin="30"  Template="{DynamicResource BtnNav}" Click="DisplayChoice">
                 <materialDesign:PackIcon Kind="ArrowBack" Width="50" Height="50" Foreground="#bfaae6" />
