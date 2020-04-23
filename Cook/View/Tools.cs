@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
-    class Tools
+    abstract class Tools
     {
 
 
@@ -33,5 +33,57 @@ namespace Cook.View
 
             
         }
+
+
+        public static bool Insertion( string req, MySqlConnection c)
+        {
+            bool res = true;
+
+            MySqlCommand cmd = c.CreateCommand();
+            cmd.CommandText = req;
+           
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                res = false;
+            }
+
+            cmd.Dispose();
+            return res;
+        }
+
+
+        public static List<List<object>> Selection(string req,MySqlConnection c)
+        {
+            MySqlCommand cmd = c.CreateCommand();
+            cmd.CommandText = req;
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            List<List<object>> res = new List<List<object>>();
+
+            while (reader.Read())
+            {
+                List<object> ligne = new List<object>();
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    object value = reader.GetValue(i);
+                    ligne.Add(value);
+                }
+                res.Add(ligne);
+            }
+
+
+            reader.Close();
+            cmd.Dispose();
+
+            return res;
+
+          
+
+        }
+
     }
 }

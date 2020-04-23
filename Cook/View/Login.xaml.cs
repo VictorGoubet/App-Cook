@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
@@ -49,22 +50,38 @@ namespace Cook.View
                 }
                 else
                 {
+                    //On se connecte à la bdd :
+                    MySqlConnection c = Tools.GetConnexion();
                     //On vérifie si l'id et le mdp son correcte :
-                    //THOMAS
+                    List<List<object>> res = Tools.Selection("select * from client where pseudo = '"+IdTxtBx.Text+"' and Mdp = '"+MdpTxtBx.Password+"';", c);
 
-                    //On affiche le bon contenue en fonction du type d'utilisateur:
-
-                    ///En réalité ici il faut comparer le type d'utilisateur et non pas les id:
-                    //THOMAS
-
-                    if (IdTxtBx.Text == "cdr")
+                    if (res.Count >0)
                     {
-                        Application.Current.MainWindow.DataContext = new Accueil(1);
+                        //Le membre existe, 
+                        Session s;
+
+                        //on regarde si il est cdr ou non :
+                        List<List<object>> cdr = Tools.Selection("select * from cdr join client on cdr.Client_idClient=client.idClient where pseudo='"+IdTxtBx.Text+"';", c);
+                        if (cdr.Count>0)
+                        {
+                            //On créé une session:
+                            s = new Session(IdTxtBx.Text,true);
+                            
+                            Application.Current.MainWindow.DataContext = new Accueil(1);
+                        }
+                        else
+                        {
+                            s = new Session(IdTxtBx.Text, false);
+                            Application.Current.MainWindow.DataContext = new Accueil(0);
+                        }
+                        MainWindow.sessionCourante = s;
                     }
-                    else
-                    {
-                        Application.Current.MainWindow.DataContext = new Accueil(0);
-                    }
+
+
+                  
+
+                    c.Close();
+                    
 
                 }
 
@@ -86,5 +103,7 @@ namespace Cook.View
             }
 
         }
+
+        
     }
 }

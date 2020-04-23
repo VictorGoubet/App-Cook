@@ -55,23 +55,12 @@ namespace Cook.View
                 if (c != null)
                 {
                     //On l'ajoute comme client : 
-
-                    #region Insertion CLIENT
-                    string insertTableCLIENT = "insert into client(NumeroTel,Nom,Prenom,Adresse,Mdp,Pseudo,AdrMail,Sexe) values('" + NumTelTxtBx.Text+"','"+NomTxtBx.Text+"','"+PrenomTxtBx.Text+"','"+AdrTxtBx.Text+"','"+PswrdTxtBx.Password+"','"+IdTxtBx.Text+"','"+AdrMailTxtBx.Text+"','"+s+"');";
-                    MySqlCommand commandCLIENT = c.CreateCommand();
-                    commandCLIENT.CommandText = insertTableCLIENT;
-                    try
+                    string reqCLIENT= "insert into client(NumeroTel,Nom,Prenom,Adresse,Mdp,Pseudo,AdrMail,Sexe) values('" + NumTelTxtBx.Text + "','" + NomTxtBx.Text + "','" + PrenomTxtBx.Text + "','" + AdrTxtBx.Text + "','" + PswrdTxtBx.Password + "','" + IdTxtBx.Text + "','" + AdrMailTxtBx.Text + "','" + s + "');";
+                    if (!Tools.Insertion(reqCLIENT, c))
                     {
-                        commandCLIENT.ExecuteNonQuery();
-                    }
-                    catch(MySqlException ex)
-                    {
-                        MessageBox.Show("Erreure lors de l'insertion :\n"+ex);
-                        return;
+                        MessageBox.Show("Erreure lors de l'insertion CLIENT");
                     }
 
-                    commandCLIENT.Dispose();
-                    #endregion
 
 
                     if (CdrY.IsChecked == true)
@@ -79,48 +68,17 @@ namespace Cook.View
                         //Si c'est un CDR on l'ajoute également comme CDR
 
                         //on commence par récupérer l'id du client que l'on vient d'ajouter :
-                        #region Selection ID
-                        string requete = "select idClient from client where NumeroTel='"+NumTelTxtBx.Text+"';";
-                        MySqlCommand commandID = c.CreateCommand();
-                        commandID.CommandText = requete;
-                        MySqlDataReader reader = commandID.ExecuteReader();
-
-                        List<List<string>> res = new List<List<string>>();
-
-                        while (reader.Read())
-                        {
-                            List<string> ligne = new List<string>();
-                            for (int i = 0; i < reader.FieldCount; i++)
-                            {
-                                string value = reader.GetValue(i).ToString();
-                                ligne.Add(value);
-                            }
-                            res.Add(ligne);
-                        }
+                        List<List<object>> res = Tools.Selection("select idClient from client where NumeroTel='" + NumTelTxtBx.Text + "';", c);
+                        string idClient = res[0][0].ToString();
 
                        
-                        reader.Close();
-                        commandID.Dispose();
 
-                        string idClient = res[0][0];
-                        #endregion
-
-                        #region Insertion CDR
-                        string insertTableCDR = "insert into cdr (Client_idClient) values("+idClient+");";
-                        MySqlCommand commandCDR = c.CreateCommand();
-                        commandCDR.CommandText = insertTableCDR;
-                        try
+                        string reqCDR = "insert into cdr (Client_idClient) values(" + idClient + ");";
+                        if (!Tools.Insertion(reqCDR, c))
                         {
-                            commandCDR.ExecuteNonQuery();
-                        }
-                        catch (MySqlException ex)
-                        {
-                            MessageBox.Show("Erreure lors de l'insertion :\n" + ex);
-                            return;
+                            MessageBox.Show("Erreure lors de l'insertion CDR ");
                         }
 
-                        commandCDR.Dispose();
-                        #endregion
 
 
                     }

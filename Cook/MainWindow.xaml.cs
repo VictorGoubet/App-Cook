@@ -21,6 +21,9 @@ namespace Cook
     /// </summary>
     public partial class MainWindow : Window
     {
+        //On va stocker ici la session:
+        public static Session sessionCourante;
+
         public MainWindow()
         {
             InitializeComponent();

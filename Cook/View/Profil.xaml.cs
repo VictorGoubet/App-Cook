@@ -28,13 +28,16 @@ namespace Cook.View
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            //On récupére les données de l'utilisateur:
+
             //THOMAS
 
-            //On remplit chaque champs avec les données : (tu peux le faire stp ? tu retrouvera le nom de chaque textbloc dans le.xaml)
+
+            //On remplit chaque champs avec les données de la session courante : 
+            NomTxtBx_Profil.Text = MainWindow.sessionCourante.Nom;
+
 
             //ATTENTION : si c'est un cdr on rajoute le compteur de cook:
-            //Temporairement on considére que c'est un cdr : (MODIF THOMAS)
+
             bool cdr = true;
             if (cdr)
             {
