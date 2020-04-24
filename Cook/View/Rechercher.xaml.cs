@@ -111,12 +111,25 @@ namespace Cook.View
 
             //On va rechercher parmis les titres de recettes existant :
             //THOMAS (utilisation de LIKE %rch%)
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "select * from recette where nom like '%" + Search_field.Text + "%';";
+            List<List<object>> res = Tools.Selection(req, c);
 
             //On stock toutes les recettes trouvées sous cette forme :
-            List<string> urlListe = new List<string> {"https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2020.2F02.2F13.2Ff5f778dd-ad0a-421b-a35d-bad4e518a612.2Ejpeg/750x562/quality/80/crop-from/center/cr/wqkgR2luZXQtRHJpbiAvIFBob3RvY3Vpc2luZSAvIEN1aXNpbmUgQWN0dWVsbGU%3D/la-poule-au-riz-de-la-mere-michele.jpeg" };
-            List<string> DescListe = new List<string> {"La poule au pot est une recette de cuisine traditionnelle de la cuisine française, ainsi qu'une spécialité de la cuisine gersoise et du Béarn, à base de pot-au-feu ou potée de poule cuite au bouillon, dans une cocotte, avec des légumes." };
-            List<string> TitleListe = new List<string> {"Poule au riz" };
-            List<double> PrixListe = new List<double> {25.40 };
+            List<string> urlListe = new List<string> {};
+            List<string> DescListe = new List<string> {};
+            List<string> TitleListe = new List<string> {};
+            List<double> PrixListe = new List<double> {};
+
+            foreach (List<object> ligne in res)
+            {
+                TitleListe.Add(ligne[1].ToString());
+                DescListe.Add(ligne[2].ToString());
+                PrixListe.Add(Convert.ToDouble(ligne[3]));
+                urlListe.Add(ligne[4].ToString());
+            }
+
+            c.Close();
 
             //On les affiches
             AffichageRct(urlListe, DescListe, TitleListe,PrixListe);

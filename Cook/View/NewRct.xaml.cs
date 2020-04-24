@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,25 @@ namespace Cook.View
             {
                 //On ajoute la recette dans la bdd:
                 //THOMAS
+                MySqlConnection c = Tools.GetConnexion();
+                string req1 = "select idCDR from cdr where Client_idClient=" + MainWindow.sessionCourante.Id + ";";
+                List<List<object>> res1 = Tools.Selection(req1, c);
+                if (!Tools.Commande(req1, c))
+                {
+                    MessageBox.Show("CDR courrant non trouvé ");
+                }
+
+                
+
+
+
+                string req2 = "insert into recette(Nom,Description,Prix,url,Type,CDR_idCDR) values('" + Input_Titre.Text + "','" + Input_Desc.Text + "','" + Input_Prix.Text + "','" + Input_Url.Text + "','" + Input_Type.Text + "', '" + res1[0] + "' );";
+                List<List<object>> res2 = Tools.Selection(req2, c);
+                if (!Tools.Commande(req2, c))
+                {
+                    MessageBox.Show("Erreure lors de l'insertion recette ");
+                }
+                c.Close();
 
                 //On actualise la page :
                 NewRct.PageNewRct = null;
