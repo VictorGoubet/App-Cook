@@ -54,7 +54,7 @@ namespace Cook.View
                     MySqlConnection c = Tools.GetConnexion();
                     //On vérifie si l'id et le mdp son correcte :
                     List<List<object>> res = Tools.Selection("select * from client where pseudo = '"+IdTxtBx.Text+"' and Mdp = '"+MdpTxtBx.Password+"';", c);
-
+                    
                     if (res.Count >0)
                     {
                         //Le membre existe, 
