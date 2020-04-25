@@ -91,7 +91,7 @@ insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseu
 
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Riz à sushi","Féculent","Kg",0,6,0,2);
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Saumon","Poisson","Kg",0,5,0,4);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Wazabi","Sauce","cL",0,50,0,10);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Wazabi","Sauce","g",0,100,0,10);
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Vinaigre de riz","Vinaigre","cL",0,500,0,9);
 
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Lardons","viande","Kg",0,15,0,1);
@@ -102,84 +102,84 @@ insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseu
 
 -- INSERTION PRODUITS/RECETTES
 
-insert into recette_has_produit values (1,1);
-insert into recette_has_produit values (1,2);
-insert into recette_has_produit values (1,3);
-insert into recette_has_produit values (1,4);
-insert into recette_has_produit values (1,5);
-insert into recette_has_produit values (1,6);
-insert into recette_has_produit values (1,7);
-insert into recette_has_produit values (1,8);
+insert into recette_has_produit values (1,1,0.5);
+insert into recette_has_produit values (1,2,10);
+insert into recette_has_produit values (1,3,5);
+insert into recette_has_produit values (1,4,5);
+insert into recette_has_produit values (1,5,5);
+insert into recette_has_produit values (1,6,10);
+insert into recette_has_produit values (1,7,50);
+insert into recette_has_produit values (1,8,3);
 
-insert into recette_has_produit values (2,9);
-insert into recette_has_produit values (2,10);
-insert into recette_has_produit values (2,11);
-insert into recette_has_produit values (2,12);
-insert into recette_has_produit values (2,13);
-insert into recette_has_produit values (2,14);
-insert into recette_has_produit values (2,8);
-insert into recette_has_produit values (2,19);
+insert into recette_has_produit values (2,9,1);
+insert into recette_has_produit values (2,10,0.2);
+insert into recette_has_produit values (2,11,2);
+insert into recette_has_produit values (2,12,1);
+insert into recette_has_produit values (2,13,20);
+insert into recette_has_produit values (2,14,0.05);
+insert into recette_has_produit values (2,8,2);
+insert into recette_has_produit values (2,19,10);
 
-insert into recette_has_produit values (3,15);
-insert into recette_has_produit values (3,16);
-insert into recette_has_produit values (3,17);
-insert into recette_has_produit values (3,18);
-insert into recette_has_produit values (3,8);
-insert into recette_has_produit values (3,6);
+insert into recette_has_produit values (3,15,2);
+insert into recette_has_produit values (3,16,0.04);
+insert into recette_has_produit values (3,17,0.1);
+insert into recette_has_produit values (3,18,0.2);
+insert into recette_has_produit values (3,14,0.1);
+insert into recette_has_produit values (3,6,5);
 
-insert into recette_has_produit values (4,19);
-insert into recette_has_produit values (4,20);
-insert into recette_has_produit values (4,15);
-insert into recette_has_produit values (4,8);
-insert into recette_has_produit values (4,21);
-insert into recette_has_produit values (4,5);
-insert into recette_has_produit values (4,6);
+insert into recette_has_produit values (4,19,10);
+insert into recette_has_produit values (4,20,1);
+insert into recette_has_produit values (4,21,2);
+insert into recette_has_produit values (4,15,8);
+insert into recette_has_produit values (4,8,1);
+insert into recette_has_produit values (4,5,3);
+insert into recette_has_produit values (4,6,5);
 
-insert into recette_has_produit values (5,21);
-insert into recette_has_produit values (5,22);
-insert into recette_has_produit values (5,23);
-insert into recette_has_produit values (5,24);
-insert into recette_has_produit values (5,5);
-insert into recette_has_produit values (5,6);
-insert into recette_has_produit values (5,5);
-insert into recette_has_produit values (5,8);
-insert into recette_has_produit values (5,15);
-insert into recette_has_produit values (5,12);
 
-insert into recette_has_produit values (6,25);
-insert into recette_has_produit values (6,26);
-insert into recette_has_produit values (6,27);
-insert into recette_has_produit values (6,28);
-insert into recette_has_produit values (6,29);
-insert into recette_has_produit values (6,5);
-insert into recette_has_produit values (6,6);
-insert into recette_has_produit values (6,8);
-insert into recette_has_produit values (6,15);
+insert into recette_has_produit values (5,21,6);
+insert into recette_has_produit values (5,22,1);
+insert into recette_has_produit values (5,23,5);
+insert into recette_has_produit values (5,24,0.1);
+insert into recette_has_produit values (5,5,5);
+insert into recette_has_produit values (5,6,3);
+insert into recette_has_produit values (5,8,1);
+insert into recette_has_produit values (5,15,2);
+insert into recette_has_produit values (5,12,1);
 
-insert into recette_has_produit values (7,30);
-insert into recette_has_produit values (7,31);
-insert into recette_has_produit values (7,32);
-insert into recette_has_produit values (7,14);
-insert into recette_has_produit values (7,15);
-insert into recette_has_produit values (7,6);
+insert into recette_has_produit values (6,25,150);
+insert into recette_has_produit values (6,26,10);
+insert into recette_has_produit values (6,27,5);
+insert into recette_has_produit values (6,28,15);
+insert into recette_has_produit values (6,29,10);
+insert into recette_has_produit values (6,5,3);
+insert into recette_has_produit values (6,6,4);
+insert into recette_has_produit values (6,8,0.5);
+insert into recette_has_produit values (6,15,1);
 
-insert into recette_has_produit values (8,33);
-insert into recette_has_produit values (8,34);
-insert into recette_has_produit values (8,35);
-insert into recette_has_produit values (8,36);
+insert into recette_has_produit values (7,30,20);
+insert into recette_has_produit values (7,31,25);
+insert into recette_has_produit values (7,32,0.05);
+insert into recette_has_produit values (7,14,0.15);
+insert into recette_has_produit values (7,15,2);
+insert into recette_has_produit values (7,6,5);
 
-insert into recette_has_produit values (9,8);
-insert into recette_has_produit values (9,7);
-insert into recette_has_produit values (9,37);
-insert into recette_has_produit values (9,6);
-insert into recette_has_produit values (9,16);
+insert into recette_has_produit values (8,33,0.3);
+insert into recette_has_produit values (8,34,0.4);
+insert into recette_has_produit values (8,35,3);
+insert into recette_has_produit values (8,36,10);
 
-insert into recette_has_produit values (10,38);
-insert into recette_has_produit values (10,39);
-insert into recette_has_produit values (10,21);
-insert into recette_has_produit values (10,23);
-insert into recette_has_produit values (10,6);
-insert into recette_has_produit values (10,12);
+insert into recette_has_produit values (9,8,2);
+insert into recette_has_produit values (9,7,20);
+insert into recette_has_produit values (9,37,0.4);
+insert into recette_has_produit values (9,6,3);
+insert into recette_has_produit values (9,16,0.25);
+
+insert into recette_has_produit values (10,38,0.2);
+insert into recette_has_produit values (10,39,0.1);
+insert into recette_has_produit values (10,21,1);
+insert into recette_has_produit values (10,23,10);
+insert into recette_has_produit values (10,6,2);
+insert into recette_has_produit values (10,12,1);
 
 
 
