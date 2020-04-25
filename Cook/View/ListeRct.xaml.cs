@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
@@ -33,11 +34,26 @@ namespace Cook.View
             //On stock les données obtenue sous cette forme :
 
             //Pour l'instant on reprend notre exemple des 3 recettes:
-            List<string> urlListe = new List<string> { "https://cache.marieclaire.fr/data/photo/w1000_c17/cuisine/4r/tartiflette-express-au-reblochon-1.jpg", "https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2020.2F02.2F13.2Ff5f778dd-ad0a-421b-a35d-bad4e518a612.2Ejpeg/750x562/quality/80/crop-from/center/cr/wqkgR2luZXQtRHJpbiAvIFBob3RvY3Vpc2luZSAvIEN1aXNpbmUgQWN0dWVsbGU%3D/la-poule-au-riz-de-la-mere-michele.jpeg" };
-            List<string> DescListe = new List<string> { "La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde", "La poule au pot est une recette de cuisine traditionnelle de la cuisine française, ainsi qu'une spécialité de la cuisine gersoise et du Béarn, à base de pot-au-feu ou potée de poule cuite au bouillon, dans une cocotte, avec des légumes." };
-            List<string> TitleListe = new List<string> { "Tartiflette", "Poule au riz" };
-            List<string> TypeListe = new List<string> { "Plat","Poté" };
-            List<double> PrixListe = new List<double> { 18.50,25.40 };
+            List<string> urlListe = new List<string>();
+            List<string> DescListe = new List<string>();
+            List<string> TitleListe = new List<string>();
+            List<string> TypeListe = new List<string>();
+            List<double> PrixListe = new List<double>();
+
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "select * from recette join cdr on recette.CDR_idCDR=cdr.idCDR where Client_idClient='"+MainWindow.sessionCourante.Id+"';";
+            List<List<object>> res = Tools.Selection(req, c);
+
+            foreach (List<object> ligne in res)
+            {
+                TitleListe.Add(ligne[1].ToString());
+                DescListe.Add(ligne[2].ToString());
+                PrixListe.Add(Convert.ToDouble(ligne[3]));
+                TypeListe.Add(ligne[4].ToString());
+                urlListe.Add(ligne[5].ToString());
+            }
+
+            c.Close();
 
             #region listePrdts
             List<string> PrdtTartiflette = new List<string> { "Pomme de terre", "Reblochons", "Lardons", "Creme", "Oignons" };
