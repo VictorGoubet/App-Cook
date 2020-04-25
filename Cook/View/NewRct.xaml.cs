@@ -41,11 +41,13 @@ namespace Cook.View
         {
 
             //On verifie que tout les champs sont remplis
-            if(Qt.Text!="Qt" && nom_prdt.Text != "Produit")
+            if(Qt.Text!="" && nom_prdt.Text != "")
             {
                 //On ajoute le produit et sa quantité à la liste afin de le stocker jusqu'à la finalisation
                 this.prdts.Add(nom_prdt.Text);
                 this.qt.Add(Convert.ToDouble(Qt.Text));
+                Qt.Text = "";
+                nom_prdt.Text = "";
             }
             
         }
@@ -71,9 +73,9 @@ namespace Cook.View
 
 
 
-                string req2 = "insert into recette(Nom,Description,Prix,url,Type,CDR_idCDR) values('" + Input_Titre.Text + "','" + Input_Desc.Text + "','" + Input_Prix.Text + "','" + Input_Url.Text + "','" + Input_Type.Text + "', '" + res1[0] + "' );";
-                List<List<object>> res2 = Tools.Selection(req2, c);
-                if (!Tools.Commande(req2, c))
+                string req2 = "insert into recette(Nom,Description,Prix,url,Type,CDR_idCDR) values('" + Input_Titre.Text + "','" + Input_Desc.Text + "','" + Input_Prix.Text + "','" + Input_Url.Text + "','" + Input_Type.Text + "', " + res1[0][0] + " );";
+                bool  res2 = Tools.Commande(req2, c);
+                if (!res2)
                 {
                     MessageBox.Show("Erreure lors de l'insertion recette ");
                 }

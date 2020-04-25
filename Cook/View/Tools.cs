@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
 
 namespace Cook.View
 {
@@ -22,7 +32,7 @@ namespace Cook.View
             {
                 string connexionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=Cook;" +
-                                         "UID=root;PASSWORD=Pluton740@!!;";
+                                         "UID=root;PASSWORD=ks7879;";
 
                 maConnexion = new MySqlConnection(connexionString);
                 maConnexion.Open();
@@ -47,8 +57,9 @@ namespace Cook.View
             {
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch(MySqlException ex)
             {
+                MessageBox.Show(ex.ToString());
                 res = false;
             }
 

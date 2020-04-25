@@ -49,8 +49,8 @@ namespace Cook.View
                 TitleListe.Add(ligne[1].ToString());
                 DescListe.Add(ligne[2].ToString());
                 PrixListe.Add(Convert.ToDouble(ligne[3]));
-                TypeListe.Add(ligne[4].ToString());
-                urlListe.Add(ligne[5].ToString());
+                TypeListe.Add(ligne[5].ToString());
+                urlListe.Add(ligne[4].ToString());
             }
 
             c.Close();
