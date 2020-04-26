@@ -46,7 +46,7 @@ namespace Cook.View
             }
             catch
             {
-                UrlSource.ImageSource = new BitmapImage(new Uri("https://www.redactio.fr/wp-content/uploads/2018/10/erreur-404.png"));
+                UrlSource.ImageSource = new BitmapImage(new Uri("https://www.labaleine.fr/sites/default/files/image-not-found.jpg"));
             
             }
            

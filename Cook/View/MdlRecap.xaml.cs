@@ -40,7 +40,15 @@ namespace Cook.View
             this.Titre.Text = this.titre;
             this.Qt.Text = this.qt.ToString();
             this.Prix.Text = (this.prix*this.qt).ToString() + " Ck ";
-            this.Image.ImageSource= new BitmapImage(new Uri(this.urlimg));
+            try
+            {
+                this.Image.ImageSource = new BitmapImage(new Uri(this.urlimg));
+            }
+            catch
+            {
+                this.Image.ImageSource = new BitmapImage(new Uri("https://www.labaleine.fr/sites/default/files/image-not-found.jpg"));
+            }
+            
         }
     }
 }
