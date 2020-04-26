@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Cook.View
 {
     /// <summary>
@@ -23,7 +24,7 @@ namespace Cook.View
     {
 
         List<string> prdts;
-        List<double> qt;
+        List<string> qt;
 
 
         public static NewRct PageNewRct =null;
@@ -32,7 +33,7 @@ namespace Cook.View
             InitializeComponent();
             PageNewRct = this;
             prdts = new List<string>();
-            qt = new List<double>();
+            qt = new List<string>();
         }
 
 
@@ -41,13 +42,27 @@ namespace Cook.View
         {
 
             //On verifie que tout les champs sont remplis
-            if(Qt.Text!="" && nom_prdt.Text != "")
+            if(Qt.Text!="" && ListePrdt.SelectedItem!=null)
             {
                 //On ajoute le produit et sa quantité à la liste afin de le stocker jusqu'à la finalisation
-                this.prdts.Add(nom_prdt.Text);
-                this.qt.Add(Convert.ToDouble(Qt.Text));
+                
+                
+                try
+                {
+                    Qt.Text = Qt.Text.Replace(".", ",");
+                    double q = Convert.ToDouble(Qt.Text);
+                    Qt.Text = Qt.Text.Replace(",", ".");
+
+                    this.qt.Add(Qt.Text);
+                    this.prdts.Add(ListePrdt.SelectedItem.ToString());
+                }
+                catch
+                {
+                    MessageBox.Show("Erreure, la valeure rentrée n'est pas numérique");
+                }
+                
                 Qt.Text = "";
-                nom_prdt.Text = "";
+                ListePrdt.SelectedItem = null;
             }
             
         }
@@ -60,34 +75,76 @@ namespace Cook.View
             if (Input_Desc.Text != "" && Input_Prix.Text != "" && Input_Titre.Text != "" && Input_Type.Text != "" && Input_Url.Text != "" && qt.Count()>0)
             {
                 //On ajoute la recette dans la bdd:
-                //THOMAS
-                MySqlConnection c = Tools.GetConnexion();
-                string req1 = "select idCDR from cdr where Client_idClient=" + MainWindow.sessionCourante.Id + ";";
-                List<List<object>> res1 = Tools.Selection(req1, c);
-                if (!Tools.Commande(req1, c))
+                try
                 {
-                    MessageBox.Show("CDR courrant non trouvé ");
-                }
+                    Input_Prix.Text = Input_Prix.Text.Replace(".", ",");
+                    double p = Convert.ToDouble(Input_Prix.Text);
+                    Input_Prix.Text = Input_Prix.Text.Replace(",", ".");
 
+                    MySqlConnection c = Tools.GetConnexion();
+                    string req1 = "select idCDR from cdr where Client_idClient=" + MainWindow.sessionCourante.Id + ";";
+                    List<List<object>> res1 = Tools.Selection(req1, c);
+                    if (!Tools.Commande(req1, c))
+                    {
+                        MessageBox.Show("CDR courrant non trouvé ");
+                    }
+
+
+
+
+
+                    string req2 = "insert into recette(Nom,Description,Prix,url,Type,CDR_idCDR) values('" + Input_Titre.Text + "','" + Input_Desc.Text + "'," + Input_Prix.Text + ",'" + Input_Url.Text + "','" + Input_Type.Text + "', " + res1[0][0] + " );";
+                    Tools.Commande(req2, c);
+                    //On récupére l'id de la recette précédemment insérée
+                    string req3 = "select idRecette from recette where Nom='" + Input_Titre.Text + "';";
+                    List<List<object>> res3 = Tools.Selection(req3, c);
+                    int idRecette = Convert.ToInt32(res3[0][0]);
+
+                    for (int k = 0; k < prdts.Count(); k++)
+                    {
+                        string req4 = "select idProduit from produit where Nom='" + prdts[k] + "';";
+                        List<List<object>> res4 = Tools.Selection(req4, c);
+                        int idProduit = Convert.ToInt32(res4[0][0]);
+                        MessageBox.Show(qt[k].ToString());
+                        string req5 = "insert into recette_has_produit values (" + idRecette + "," + idProduit + "," + qt[k] + ");";
+                        Tools.Commande(req5, c);
+
+
+                    }
+
+
+                    c.Close();
+
+                    //On actualise la page :
+                    NewRct.PageNewRct = null;
+                    (Application.Current.MainWindow.DataContext as Accueil).DataContext = new NewRct();
+
+                }
+                catch {
+                    MessageBox.Show("Veuillez réessayer");
+                    
+                    }
                 
 
-
-
-                string req2 = "insert into recette(Nom,Description,Prix,url,Type,CDR_idCDR) values('" + Input_Titre.Text + "','" + Input_Desc.Text + "','" + Input_Prix.Text + "','" + Input_Url.Text + "','" + Input_Type.Text + "', " + res1[0][0] + " );";
-                bool  res2 = Tools.Commande(req2, c);
-                if (!res2)
-                {
-                    MessageBox.Show("Erreure lors de l'insertion recette ");
-                }
-                c.Close();
-
-                //On actualise la page :
-                NewRct.PageNewRct = null;
-                (Application.Current.MainWindow.DataContext as Accueil).DataContext = new NewRct();
+                
 
             }
 
 
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "select Nom from produit";
+            List<List<Object>> res = Tools.Selection(req, c);
+            List<string> Prdts = new List<string>();
+
+            foreach(List<object> l in res)
+            {
+                Prdts.Add(l[0].ToString());
+            }
+            ListePrdt.ItemsSource = Prdts;
         }
     }
 }

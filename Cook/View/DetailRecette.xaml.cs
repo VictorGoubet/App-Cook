@@ -58,9 +58,16 @@ namespace Cook.View
 
 
             //On va remplir le control avec les données passé en paramétre:
-            ImgRct.ImageSource= new BitmapImage(new Uri(this.UrlRct));
+            try
+            {
+                ImgRct.ImageSource = new BitmapImage(new Uri(this.UrlRct));
+            }
+            catch
+            {
+                ImgRct.ImageSource = new BitmapImage(new Uri("https://www.redactio.fr/wp-content/uploads/2018/10/erreur-404.png"));
+            }
 
-            for(int i= 0;i < QtListeRct.Count();i++)
+            for (int i= 0;i < QtListeRct.Count();i++)
             {
                 TextBlock q = new TextBlock();
                 q.Text = "- "+QtListeRct[i].ToString()+" "+UnListeRct[i];

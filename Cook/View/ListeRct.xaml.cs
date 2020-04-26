@@ -40,8 +40,12 @@ namespace Cook.View
             List<string> TypeListe = new List<string>();
             List<double> PrixListe = new List<double>();
 
+            List<List<string>> PrdtListe = new List<List<string>>();
+            List<List<double>> QtListe = new List<List<double>>();
+            List<List<string>> UnListe = new List<List<string>>();
+
             MySqlConnection c = Tools.GetConnexion();
-            string req = "select * from recette join cdr on recette.CDR_idCDR=cdr.idCDR where Client_idClient='"+MainWindow.sessionCourante.Id+"';";
+            string req = "select * from recette join cdr on recette.CDR_idCDR=cdr.idCDR where Client_idClient="+MainWindow.sessionCourante.Id+";";
             List<List<object>> res = Tools.Selection(req, c);
 
             foreach (List<object> ligne in res)
@@ -51,28 +55,32 @@ namespace Cook.View
                 PrixListe.Add(Convert.ToDouble(ligne[3]));
                 TypeListe.Add(ligne[5].ToString());
                 urlListe.Add(ligne[4].ToString());
+
+                //On ajoute les produits correspondants :
+                string reqP = "select p.Nom,p.Unite,rp.Quantite from produit as p join recette_has_produit as rp on p.idProduit=rp.Produit_idProduit join recette as r on rp.Recette_idRecette=r.idRecette where r.idRecette="+ ligne[0] + ";";
+                List<List<object>> resP = Tools.Selection(reqP, c);
+
+                List<string> sousListePrdt = new List<string>();
+                List<double> sousListeQtt = new List<double>();
+                List<string> sousListeUn = new List<string>();
+
+                foreach (List<object> produit in resP)
+                {
+                    sousListePrdt.Add(produit[0].ToString());
+                    sousListeQtt.Add(Convert.ToDouble(produit[2]));
+                    sousListeUn.Add(produit[1].ToString());
+
+                }
+                PrdtListe.Add(sousListePrdt);
+                QtListe.Add(sousListeQtt);
+                UnListe.Add(sousListeUn);
             }
 
             c.Close();
 
-            #region listePrdts
-            List<string> PrdtTartiflette = new List<string> { "Pomme de terre", "Reblochons", "Lardons", "Creme", "Oignons" };
-            List<string> PrdtPoule = new List<string> { "Poule", "Riz", "Beure", "Carottes", "Choux" };
-            #endregion
 
-            #region liste QtPrdt
-            List<double> QtPrdtTartiflette = new List<double> { 10,250,200,20,2};
-            List<double> QtrdtPoule = new List<double> {1,200,50,3,1};
-            #endregion
 
-            #region liste UnPrdt
-            List<string> UnPrdtTartiflette = new List<string> {"","g","g","cl",""};
-            List<string> UnrdtPoule = new List<string> {"","g","g","",""};
-            #endregion
-
-            List<List<string>> PrdtListe = new List<List<string>> { PrdtTartiflette,PrdtPoule};
-            List<List<double>> QtListe = new List<List<double>> {QtPrdtTartiflette,QtrdtPoule};
-            List<List<string>> UnListe = new List<List<string>> { UnPrdtTartiflette,UnrdtPoule };
+            
 
 
             //On créé les controles Detail Recette et on les affiche dan le ScrollViewer

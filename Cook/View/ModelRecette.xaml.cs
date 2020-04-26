@@ -40,7 +40,16 @@ namespace Cook.View
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //On remplis le controle  avec les données fournies:
-            UrlSource.ImageSource = new BitmapImage(new Uri(this.url));
+            try
+            {
+                UrlSource.ImageSource = new BitmapImage(new Uri(this.url));
+            }
+            catch
+            {
+                UrlSource.ImageSource = new BitmapImage(new Uri("https://www.redactio.fr/wp-content/uploads/2018/10/erreur-404.png"));
+            
+            }
+           
             Title_Rct.Text = this.title;
             Description_Rct.Text = this.description;
             Prix.Text = this.prixRct.ToString() + " Ck";

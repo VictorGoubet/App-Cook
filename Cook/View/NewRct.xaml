@@ -6,7 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Cook.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="450" d:DesignWidth="700"
+             Loaded="UserControl_Loaded">
     
     <Grid >
         <Grid.ColumnDefinitions>
@@ -50,11 +51,8 @@
             </Border>
             
         </StackPanel>
-        
-        <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="30 0 0 80" >
-            <TextBox Style = "{StaticResource placeHolder}" x:Name="nom_prdt" Margin="2" Tag="Produit" />
-            <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2" Margin="0 0 40 0" />
-        </StackPanel>
+
+        <ComboBox x:Name="ListePrdt"  Grid.Column="1" VerticalAlignment="Bottom" Margin="30 0 0 80"/>
 
         <StackPanel VerticalAlignment="Bottom" Margin="30 0 0 80" Grid.Column="2" >
             <TextBox Style = "{StaticResource placeHolder}" Margin="2" x:Name="Qt" Tag="Qt" Width="50" HorizontalAlignment="Left" />
