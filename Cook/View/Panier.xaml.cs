@@ -63,31 +63,6 @@ namespace Cook.View
                 Stck_Rcp.Children.Add(item);
                 prixTotal += QtListe[k] * PrixListe[k];
 
-
-                MySqlConnection c = Tools.GetConnexion();
-
-                string req10 = "select idRecette from recette where Nom='" + TitleListe[k] + "';";
-                string idRct = Tools.Selection(req10, c)[0][0].ToString();
-                string req11 = "select sum(nbRecette) from commande_has_recette where Recette_idRecette=" + idRct + "  ;";
-
-                object nbV = Tools.Selection(req11, c)[0][0];
-                if (nbV is DBNull)
-                {
-                    nbV = 0;
-                }
-                int nbVente = Convert.ToInt32(nbV);
-
-                c.Close();
-
-                if (nbVente + QtListe[k] >= 50)
-                {
-                    prixTotal =prixTotal + 5;
-                }
-                else if(nbVente + QtListe[k] >= 10)
-                {
-                    prixTotal = prixTotal + 2;
-                }
-
             }
             //on affiche le prix total:
             PrxTT.Text = "Total : " + prixTotal.ToString()+" Ck";
@@ -139,7 +114,46 @@ namespace Cook.View
 
                 string req4 = "insert into commande_has_recette values(" + idCmd + "," + idRct + "," + Rechercher.PageRechercher.qts[k] + " );";
                 Tools.Commande(req4, c);
+
+
+                string req5 = "select sum(nbRecette) from commande_has_recette where Recette_idRecette=" + idRct + "  ;";
+
+                object nbV = Tools.Selection(req5, c)[0][0];
+                if (nbV is DBNull)
+                {
+                    nbV = 0;
+                }
+                int nbVente = Convert.ToInt32(nbV);
+
+
+                if (nbVente >= 50)
+                {
+                    string req6 = "select CDR_idCDR from recette where idRecette='" + idRct + "';";
+                    string idCdr = Tools.Selection(req3, c)[0][0].ToString();
+
+
+                    string req7 = "UPDATE recette SET Prix=Prix+5 where idRecette='" + idRct + "';";
+                    Tools.Commande(req7, c);
+
+                    string req8 = "UPDATE cdr SET solde=solde+4 where idCDR='" + idCdr + "';";
+                    Tools.Commande(req8, c);
+                }
+                else if (nbVente >= 10)
+                {
+                    
+                    string req9 = "UPDATE recette SET Prix=Prix+2 where idRecette='" + idRct + "';";
+                    Tools.Commande(req9, c);
+                }
+
             }
+
+
+            
+
+           
+            
+
+
 
 
 

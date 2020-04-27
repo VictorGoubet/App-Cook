@@ -22,6 +22,7 @@ namespace Cook.View
         string sexe;
         string numerTel;
         double solde;
+        string idCDR;
 
         public string Id { get => id; set => id = value; }
         public string Nom { get => nom; set => nom = value; }
@@ -34,6 +35,7 @@ namespace Cook.View
         public string Sexe { get => sexe; set => sexe = value; }
         public string NumerTel { get => numerTel; set => numerTel = value; }
         public double Solde { get => solde; set => solde = value; }
+        public string IdCDR { get => idCDR; set => idCDR = value; }
 
         public Session(string pseudo,bool cdr)
         {
@@ -62,8 +64,9 @@ namespace Cook.View
 
             if (cdr)
             {
-                List<List<object>> soldes = Tools.Selection("select solde from cdr join client on cdr.Client_idClient=client.idClient where pseudo='" + this.pseudo + "';", c);
-                this.Solde = Convert.ToDouble(soldes[0][0]);
+                List<List<object>> res10 = Tools.Selection("select solde,idCDR from cdr join client on cdr.Client_idClient=client.idClient where pseudo='" + this.pseudo + "';", c);
+                this.Solde = Convert.ToDouble(res10[0][0]);
+                this.idCDR= res10[0][1].ToString();
             }
 
         }
@@ -77,7 +80,7 @@ namespace Cook.View
             res=Tools.Commande(req, c);
             if (this.Cdr && res)
             {
-                string req1="UPDATE cdr SET solde="+this.solde+";";
+                string req1="UPDATE cdr SET solde="+this.solde+ " where idClient='" + this.IdCDR + "';";
                 res = Tools.Commande(req1, c);
             }
 
