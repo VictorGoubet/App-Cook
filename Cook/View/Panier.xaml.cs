@@ -70,7 +70,12 @@ namespace Cook.View
                 string idRct = Tools.Selection(req10, c)[0][0].ToString();
                 string req11 = "select sum(nbRecette) from commande_has_recette where Recette_idRecette=" + idRct + "  ;";
 
-                int nbVente = Convert.ToInt32(Tools.Selection(req11, c)[0][0]);
+                object nbV = Tools.Selection(req11, c)[0][0];
+                if (nbV == null)
+                {
+                    nbV = 0;
+                }
+                int nbVente = Convert.ToInt32(nbV);
 
                 c.Close();
 
