@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
@@ -89,8 +90,9 @@ namespace Cook.View
         private void del_Click(object sender, RoutedEventArgs e)
         {
             //On supprime la recette de la bdd
-            string req = "DELETE FROM Recette where nom=" + TitleRct + ";";
-
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "DELETE FROM Recette where nom='" + TitleRct + "';";
+            Tools.Commande(req, c);
             //On actualise l'affichage de la page DelRct:
             ((Application.Current.MainWindow.DataContext as AccueilGestionnaire).DataContext as DelRct).UserControl_Loaded(sender, e);
         }
