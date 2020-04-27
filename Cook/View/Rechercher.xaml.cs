@@ -38,11 +38,7 @@ namespace Cook.View
             this.qts = new List<int>();
             this.urls = new List<string>();
             PageRechercher = this;
-        }
 
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
             //On remplis l'adresse avec celle de la session courante :
             AdrTxtBx_Search.Text = MainWindow.sessionCourante.Adresse;
 
@@ -67,12 +63,14 @@ namespace Cook.View
 
             c.Close();
 
-           
+
 
             //On ajoute un controle "ModelRecette" par recette
             AffichageRct(urlListe, DescListe, TitleListe, PrixListe);
-
         }
+
+
+       
 
         private void Btn_Edit_Search_Click(object sender, RoutedEventArgs e)
         {

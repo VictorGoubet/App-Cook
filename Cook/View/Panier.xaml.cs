@@ -68,7 +68,7 @@ namespace Cook.View
 
                 string req10 = "select idRecette from recette where Nom='" + TitleListe[k] + "';";
                 string idRct = Tools.Selection(req10, c)[0][0].ToString();
-                string req11 = "select sum(nbRecette) from commande_has_recette where idRecette=" + idRct + "  ;";
+                string req11 = "select sum(nbRecette) from commande_has_recette where Recette_idRecette=" + idRct + "  ;";
                 int nbVente = Convert.ToInt32(Tools.Selection(req11, c)[0][0]);
 
                 c.Close();

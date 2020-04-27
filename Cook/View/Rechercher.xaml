@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Cook.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="700"
-             Loaded="UserControl_Loaded">
+             >
     
     <Grid x:Name="Search_Grid">
 

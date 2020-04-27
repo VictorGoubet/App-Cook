@@ -85,7 +85,10 @@ namespace Cook.View
                 Rechercher.PageRechercher.urls.Add(this.url);
 
                 //On reinitialise le compteur:
-                compteur.Text = "0";
+                //compteur.Text = "0";
+                Btn_Moins.IsEnabled = false;
+                Btn_Plus.IsEnabled = false;
+                Btn_Commander.IsEnabled = false;
 
             }
 
