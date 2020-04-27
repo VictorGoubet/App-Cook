@@ -26,14 +26,15 @@ namespace Cook.View
         int index;
         int nbClient;
         int nbCdr;
-        List<string> Liste_Nom;
-        List<int> Liste_nb;
+        int nbRct;
+        Dictionary<string, int> ListeAf2;
+        List<string> prdts;
 
         public DemoPage()
         {
             InitializeComponent();
-            Liste_Nom = new List<string>();
-            Liste_nb = new List<int>();
+            ListeAf2= new Dictionary<string, int>();
+            prdts = new List<string>();
             index = 1;
         }
 
@@ -47,12 +48,26 @@ namespace Cook.View
             string req = "select count(*) from client";
             nbClient = Convert.ToInt32(Tools.Selection(req, c)[0][0]);
 
-            req = "select count(*),client.nom from commande_has_recette as cr join cdr on cr.Recette_CDR_idCDR=cdr.idCDR join client on cdr.Client_idClient=client.idClient group by idCDR;";
+            req = "select count(*) from cdr";
+            nbCdr = Convert.ToInt32(Tools.Selection(req, c)[0][0]);
+
+            req = "select sum(cr.nbRecette),client.nom from commande_has_recette as cr join recette on cr.Recette_idRecette=recette.idRecette join cdr on cdr.idCDR=recette.CDR_idCDR join client on client.idClient=cdr.Client_idClient group by idCDR;";
             List<List<object>> res = Tools.Selection(req, c);
             foreach( List<object> ligne in res){
-                Liste_nb.Add(Convert.ToInt32(res[0]));
-                Liste_Nom.Add(res[1].ToString());
+
+                ListeAf2.Add(ligne[1].ToString(), Convert.ToInt32(ligne[0]));
             }
+
+            req = "select count(*) from recette";
+            nbRct = Convert.ToInt32(Tools.Selection(req, c)[0][0]);
+
+            req = "select nom from produit where stockActuel<=2*StockMin";
+            foreach(List<object> l in Tools.Selection(req, c))
+            {
+                prdts.Add(l[0].ToString());
+            }
+
+
             c.Close();
 
 
@@ -129,7 +144,6 @@ namespace Cook.View
 
         private void Affichage1()
         {
-            //THOMAS : Il faut ici récupérer le nombre n de client
            
             TextBlock t = new TextBlock();
             t.Foreground = Brushes.Black;
@@ -140,37 +154,29 @@ namespace Cook.View
         }
         private void Affichage2()
         {
-            //THOMAS : Il faut ici récupérer le nombre n de CDR
+
             TextBlock t = new TextBlock();
             t.Foreground = Brushes.Black;
             t.FontWeight = FontWeights.Bold;
             t.Text = "Nombre de CDR : " + nbCdr.ToString()+"\n";
             viewer.Children.Add(t);
 
-            //THOMAS : On récupére la liste des noms des CDR et pour chacun leurs nombre de recette commandées
-
-            for(int k = 0; k < Liste_nb.Count(); k++)
+            foreach(KeyValuePair<string,int> elem in ListeAf2.OrderByDescending(key=>key.Value))
             {
                 TextBlock t2 = new TextBlock();
-                t2.Text = Liste_Nom[k]+" : "+Liste_nb[k]+" recettes";
+                t2.Text =String.Format("{0} : recettes {1}",elem.Key,elem.Value);
                 viewer.Children.Add(t2);
-
             }
-
             
-
 
         }
         private void Affichage3()
         {
 
-            //THOMAS : Il faut ici récupérer le nombre n de recettes
-
-            int n = 52;
             TextBlock t = new TextBlock();
             t.Foreground = Brushes.Black;
             t.FontWeight = FontWeights.Bold;
-            t.Text = "Nombre de recette : " + n.ToString();
+            t.Text = "Nombre de recette : " + nbRct.ToString();
             viewer.Children.Add(t);
 
         }
@@ -183,11 +189,7 @@ namespace Cook.View
             viewer.Children.Add(t);
 
 
-            //THOMAS : Il faut ici récupérer la Liste des produits ayant une quantité en stock inférieure ou égale à deux fois leur quantité minimale
-
-            List<string> Liste_prdt = new List<string> { "Farine", "Oeuf", "Boeuf", "Salade", "Mais", "Jambon", "Farine", "Oeuf", "Boeuf", "Salade", "Mais", "Jambon" };
-
-            foreach(string elem in Liste_prdt)
+            foreach(string elem in prdts)
             {
                 TextBlock t2 = new TextBlock();
                 t2.Text = elem;
@@ -225,19 +227,32 @@ namespace Cook.View
                 Affichage5();
 
                 //THOMAS : Il faut ici récupérer la Liste des recettes utilisant le produit recherché et également prendre sa quantité dans cette recette et l'unité associé au produit
-                string unite = "kg";
-                List<string> Nom_Recette = new List<string> { "Burger", "Poule au riz" };
-                List<double> Qt = new List<double> {14.5, 25};
 
-                TextBlock prdt= new TextBlock();
-                prdt.Text = "\nIngrédient : "+ nomIngredient+"\n";
-                prdt.Foreground = Brushes.Black;
-                prdt.FontWeight = FontWeights.Bold;
+                string unite;
+                List<string> Nom_Recette = new List<string>();
+                List<string> Qt = new List<string>();
 
-                viewer.Children.Add(prdt);
-
-                if (Nom_Recette.Count() > 0)
+                MySqlConnection c = Tools.GetConnexion();
+                string req = "select Quantite,p.Unite,r.nom from recette_has_produit as rc join produit as p on p.idProduit=rc.Produit_idProduit join recette as r on r.idRecette=rc.Recette_idRecette where p.nom ='"+nomIngredient+"';";
+                List<List<object>> res = Tools.Selection(req, c);
+                if (res.Count() > 0)
                 {
+                    unite = res[0][1].ToString();
+                    foreach (List<object> ligne in res)
+                    {
+                        Nom_Recette.Add(ligne[2].ToString());
+                        Qt.Add(ligne[0].ToString());
+                    }
+
+
+
+                    TextBlock prdt = new TextBlock();
+                    prdt.Text = "\nIngrédient : " + nomIngredient + "\n";
+                    prdt.Foreground = Brushes.Black;
+                    prdt.FontWeight = FontWeights.Bold;
+
+                    viewer.Children.Add(prdt);
+
                     for (int k = 0; k < Nom_Recette.Count(); k++)
                     {
                         TextBlock t = new TextBlock();
@@ -252,6 +267,8 @@ namespace Cook.View
                     t.Text = "Oops, il semblerait que ce produit est utilisé dans aucunes recettes !";
                     viewer.Children.Add(t);
                 }
+                
+                
 
                 
                 

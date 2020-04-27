@@ -198,6 +198,6 @@ insert into commande_has_recette values(2,8,2);
 insert into commande_has_recette values(2,4,1);
 
 insert into commande_has_recette values(3,10,2);
-
+insert into commande_has_recette values(3,8,3);
 
 
