@@ -64,7 +64,19 @@ namespace Cook.View
                 prixTotal += QtListe[k] * PrixListe[k];
 
 
+                MySqlConnection c = Tools.GetConnexion();
 
+                string req10 = "select idRecette from recette where Nom='" + TitleListe[k] + "';";
+                string idRct = Tools.Selection(req10, c)[0][0].ToString();
+                string req11 = "select sum(nbRecette) from commande_has_recette where idRecette=" + idRct + "  ;";
+                int nbVente = Convert.ToInt32(Tools.Selection(req11, c)[0][0]);
+
+                c.Close();
+
+                if (nbVente + QtListe[k] >= 10)
+                {
+                    prixTotal =prixTotal + 2;
+                }
 
             }
             //on affiche le prix total:
@@ -85,6 +97,7 @@ namespace Cook.View
             Rechercher.PageRechercher.urls.Clear();
             prixTotal = 0;
             PrxTT.Text = "Total : 0 Ck";
+            Rechercher.PageRechercher = null;
 
         }
 
@@ -105,14 +118,19 @@ namespace Cook.View
             string req2 = "select MAX(idCommande) from commande;";
             string idCmd = Tools.Selection(req2, c)[0][0].ToString();
 
-            string req5 = "select MAX(idCommande) from commande;";
            
+
             for (int k = 0; k < Rechercher.PageRechercher.titres.Count(); k++)
             {
                 
                 string req3 ="select idRecette from recette where Nom='" + Rechercher.PageRechercher.titres[k] + "';";
                 string idRct= Tools.Selection(req3, c)[0][0].ToString();
+
+
                 
+               
+
+
                 string req4 = "insert into commande_has_recette values(" + idCmd + "," + idRct + "," + Rechercher.PageRechercher.qts[k] + " );";
                 Tools.Commande(req4, c);
             }
