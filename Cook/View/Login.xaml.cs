@@ -21,8 +21,6 @@ namespace Cook.View
     /// </summary>
     public partial class Login : UserControl
     {
-        static Dictionary<string, string> Gestionnaires=new Dictionary<string, string>{ {"root","123"}
-        };
 
         public Login()
         {
@@ -41,19 +39,20 @@ namespace Cook.View
         {
             /// On verifie que tout les champs sont remplis
             if(IdTxtBx.Text!="" && MdpTxtBx.Password!="")
-            { 
-            
+            {
+                //On se connecte à la bdd :
+                MySqlConnection c = Tools.GetConnexion();
+                List<List<object>> res = Tools.Selection("select * from gestionnaire where idGestionnaire = '" + IdTxtBx.Text + "' and Mdp = '" + MdpTxtBx.Password + "';", c);
                 //On vérifie qu'on n'essaie pas de se connecter en mode gestionnaire
-               if(Gestionnaires.ContainsKey(IdTxtBx.Text) && Gestionnaires[IdTxtBx.Text] == MdpTxtBx.Password)
+                if (res.Count()>0)
                 {
                     Application.Current.MainWindow.DataContext = new AccueilGestionnaire();
                 }
                 else
                 {
-                    //On se connecte à la bdd :
-                    MySqlConnection c = Tools.GetConnexion();
+                    
                     //On vérifie si l'id et le mdp son correcte :
-                    List<List<object>> res = Tools.Selection("select * from client where pseudo = '"+IdTxtBx.Text+"' and Mdp = '"+MdpTxtBx.Password+"';", c);
+                     res = Tools.Selection("select * from client where pseudo = '"+IdTxtBx.Text+"' and Mdp = '"+MdpTxtBx.Password+"';", c);
                     
                     if (res.Count >0)
                     {

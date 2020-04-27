@@ -50,17 +50,17 @@
 
                     <TextBlock x:Name="Description"  TextWrapping="Wrap"  FontSize="15" FontFamily="Helvetica" />
                 </ScrollViewer>
-                
+                <Border Height="1" Grid.Row="1" Opacity="0.8" BorderBrush="#bfaae6" BorderThickness="1" Margin="10 0 10 0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
             </Grid>
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="10">
 
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Height="1" Opacity="0.8" BorderBrush="#bfaae6" BorderThickness="1" Margin="10 0 10 0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+                    
                     <StackPanel x:Name="Prdt" Margin="0 0 0 20"  VerticalAlignment="Bottom"  HorizontalAlignment="Center" />
                     <StackPanel x:Name="Qt_Prdt" Margin="0 0 0 20"  VerticalAlignment="Bottom"  HorizontalAlignment="Left" Grid.Column="1" />
 

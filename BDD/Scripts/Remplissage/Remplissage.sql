@@ -156,7 +156,7 @@ insert into recette_has_produit values (6,6,4);
 insert into recette_has_produit values (6,8,0.5);
 insert into recette_has_produit values (6,15,1);
 
-insert into recette_has_produit values (7,30,20);
+insert into recette_has_produit values (7,30,0.2);
 insert into recette_has_produit values (7,31,25);
 insert into recette_has_produit values (7,32,0.05);
 insert into recette_has_produit values (7,14,0.15);
@@ -199,5 +199,9 @@ insert into commande_has_recette values(2,4,1);
 
 insert into commande_has_recette values(3,10,2);
 insert into commande_has_recette values(3,8,3);
+
+-- INSERTION GESTIONNAIRE
+
+insert into gestionnaire values("root","123");
 
 
