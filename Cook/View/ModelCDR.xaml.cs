@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,13 @@ namespace Cook.View
         {
             //On supprime le cdr de la bdd
             //THOMAS
+
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "delete from cdr where idCDR = "+ this.IdCDR + ";";
+            Tools.Commande(req, c);
+            c.Close();
+
+
 
             //On actualise l'affichage :
             ((Application.Current.MainWindow.DataContext as AccueilGestionnaire).DataContext as DelCdr).UserControl_Loaded(sender, e);
