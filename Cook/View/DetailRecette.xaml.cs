@@ -89,7 +89,7 @@ namespace Cook.View
         private void del_Click(object sender, RoutedEventArgs e)
         {
             //On supprime la recette de la bdd
-            //THOMAS
+            string req = "DELETE FROM Recette where nom=" + TitleRct + ";";
 
             //On actualise l'affichage de la page DelRct:
             ((Application.Current.MainWindow.DataContext as AccueilGestionnaire).DataContext as DelRct).UserControl_Loaded(sender, e);
