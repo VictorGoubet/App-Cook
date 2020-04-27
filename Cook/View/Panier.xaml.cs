@@ -83,6 +83,7 @@ namespace Cook.View
             prixTotal = 0;
             PrxTT.Text = "Total : 0 Ck";
             Rechercher.PageRechercher = null;
+            MainWindow.sessionCourante.UpdateBdd();
 
         }
 
@@ -116,6 +117,7 @@ namespace Cook.View
                 Tools.Commande(req4, c);
 
             }
+            
 
 
             c.Close();
