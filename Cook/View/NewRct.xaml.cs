@@ -105,7 +105,6 @@ namespace Cook.View
                         string req4 = "select idProduit from produit where Nom='" + prdts[k] + "';";
                         List<List<object>> res4 = Tools.Selection(req4, c);
                         int idProduit = Convert.ToInt32(res4[0][0]);
-                        MessageBox.Show(qt[k].ToString());
                         string req5 = "insert into recette_has_produit values (" + idRecette + "," + idProduit + "," + qt[k] + ");";
                         Tools.Commande(req5, c);
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
@@ -23,17 +24,40 @@ namespace Cook.View
 
 
         int index;
+        int nbClient;
+        int nbCdr;
+        List<string> Liste_Nom;
+        List<int> Liste_nb;
 
         public DemoPage()
         {
             InitializeComponent();
+            Liste_Nom = new List<string>();
+            Liste_nb = new List<int>();
             index = 1;
         }
 
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+
+            //On va enregistrer les réponses de toutes les requêtes :
+
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "select count(*) from client";
+            nbClient = Convert.ToInt32(Tools.Selection(req, c)[0][0]);
+
+            req = "select count(*),client.nom from commande_has_recette as cr join cdr on cr.Recette_CDR_idCDR=cdr.idCDR join client on cdr.Client_idClient=client.idClient group by idCDR;";
+            List<List<object>> res = Tools.Selection(req, c);
+            foreach( List<object> ligne in res){
+                Liste_nb.Add(Convert.ToInt32(res[0]));
+                Liste_Nom.Add(res[1].ToString());
+            }
+            c.Close();
+
+
             Affichage(index);
+            
         }
 
 
@@ -106,29 +130,24 @@ namespace Cook.View
         private void Affichage1()
         {
             //THOMAS : Il faut ici récupérer le nombre n de client
-
-            int n = 221;
+           
             TextBlock t = new TextBlock();
             t.Foreground = Brushes.Black;
             t.FontWeight = FontWeights.Bold;
-            t.Text = "Nombre de client : "+n.ToString();
+            t.Text = "Nombre de client : "+ nbClient.ToString();
             viewer.Children.Add(t);
 
         }
         private void Affichage2()
         {
             //THOMAS : Il faut ici récupérer le nombre n de CDR
-
-            int n = 0;
             TextBlock t = new TextBlock();
             t.Foreground = Brushes.Black;
             t.FontWeight = FontWeights.Bold;
-            t.Text = "Nombre de CDR : " + n.ToString()+"\n";
+            t.Text = "Nombre de CDR : " + nbCdr.ToString()+"\n";
             viewer.Children.Add(t);
 
             //THOMAS : On récupére la liste des noms des CDR et pour chacun leurs nombre de recette commandées
-            List<string> Liste_Nom = new List<string> {"Jean","Daniel","Marcel"};
-            List<int> Liste_nb = new List<int> { 14,2,23};
 
             for(int k = 0; k < Liste_nb.Count(); k++)
             {

@@ -182,7 +182,22 @@ insert into recette_has_produit values (10,6,2);
 insert into recette_has_produit values (10,12,1);
 
 
+-- INSERTION COMMANDE
 
+insert into commande (Date,Montant,Client_idClient) values('2020-04-27',19.99,4);
+insert into commande (Date,Montant,Client_idClient) values("2020-03-15",50.49,8);
+insert into commande (Date,Montant,Client_idClient) values("2020-04-24",15,12);
+
+-- INSERTION COMMANDE_HAS_RECETTE
+
+insert into commande_has_recette values(1,7,1);
+insert into commande_has_recette values(1,9,1);
+
+insert into commande_has_recette values(2,5,1);
+insert into commande_has_recette values(2,8,2);
+insert into commande_has_recette values(2,4,1);
+
+insert into commande_has_recette values(3,10,2);
 
 
 
