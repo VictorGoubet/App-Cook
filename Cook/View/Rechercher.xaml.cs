@@ -27,6 +27,7 @@ namespace Cook.View
         public List<double> prixs;
         public List<int> qts;
         public List<string> urls;
+        
 
         public Rechercher()
         {
