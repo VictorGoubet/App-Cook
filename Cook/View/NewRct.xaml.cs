@@ -79,6 +79,10 @@ namespace Cook.View
                 {
                     Input_Prix.Text = Input_Prix.Text.Replace(".", ",");
                     double p = Convert.ToDouble(Input_Prix.Text);
+                    if(p<10 || p > 40)
+                    {
+                        throw new Exception("Le prix doit être compris entre 10 et 40 Cook ! ");
+                    }
                     Input_Prix.Text = Input_Prix.Text.Replace(",", ".");
 
                     MySqlConnection c = Tools.GetConnexion();
@@ -116,11 +120,12 @@ namespace Cook.View
 
                     //On actualise la page :
                     NewRct.PageNewRct = null;
+                    Rechercher.PageRechercher = null;
                     (Application.Current.MainWindow.DataContext as Accueil).DataContext = new NewRct();
 
                 }
-                catch {
-                    MessageBox.Show("Veuillez réessayer");
+                catch(Exception ex) {
+                    MessageBox.Show(ex+"\n Veuillez réessayer");
                     
                     }
                 

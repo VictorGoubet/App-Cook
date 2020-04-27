@@ -77,7 +77,7 @@ namespace Cook.View
             //On créé les controle Details recette en les remplissant avec les informations obtenues et on les stack dans un pannel:
             for (int k = 0; k < urlListe.Count(); k++)
             {
-                DetailRecette item = new DetailRecette(false, urlListe[k], DescListe[k], TitleListe[k], TypeListe[k], PrdtListe[k], QtListe[k], UnListe[k], PrixListe[k]);
+                DetailRecette item = new DetailRecette(true, urlListe[k], DescListe[k], TitleListe[k], TypeListe[k], PrdtListe[k], QtListe[k], UnListe[k], PrixListe[k]);
                 item.Margin = new Thickness(0, 0, 0, 10);
                 item.Width = 600;
                 item.Height = 300;

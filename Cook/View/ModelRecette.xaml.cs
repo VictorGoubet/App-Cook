@@ -89,6 +89,7 @@ namespace Cook.View
                 Btn_Moins.IsEnabled = false;
                 Btn_Plus.IsEnabled = false;
                 Btn_Commander.IsEnabled = false;
+                Btn_Commander.Opacity = 0.2;
 
             }
 
