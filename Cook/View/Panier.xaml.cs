@@ -68,14 +68,18 @@ namespace Cook.View
 
                 string req10 = "select idRecette from recette where Nom='" + TitleListe[k] + "';";
                 string idRct = Tools.Selection(req10, c)[0][0].ToString();
-                string req11 = "select sum(nbRecette) from commande_has_recette where idRecette=" + idRct + "  ;";
+                string req11 = "select sum(nbRecette) from commande_has_recette where recette_idRecette=" + idRct + "  ;";
                 int nbVente = Convert.ToInt32(Tools.Selection(req11, c)[0][0]);
 
                 c.Close();
 
-                if (nbVente + QtListe[k] >= 10)
+                if (nbVente + QtListe[k] >= 50)
                 {
-                    prixTotal =prixTotal + 2;
+                    prixTotal =prixTotal + 5;
+                }
+                else if(nbVente + QtListe[k] >= 10)
+                {
+                    prixTotal = prixTotal + 2;
                 }
 
             }
