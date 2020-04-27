@@ -68,6 +68,7 @@ namespace Cook.View
                 this.Solde = Convert.ToDouble(res10[0][0]);
                 this.idCDR= res10[0][1].ToString();
             }
+            c.Close();
 
         }
 
@@ -80,7 +81,7 @@ namespace Cook.View
             res=Tools.Commande(req, c);
             if (this.Cdr && res)
             {
-                string req1="UPDATE cdr SET solde="+this.solde+ " where idClient='" + this.IdCDR + "';";
+                string req1="UPDATE cdr SET solde="+this.solde+ " where idCDR=" + this.IdCDR + ";";
                 res = Tools.Commande(req1, c);
             }
 
