@@ -71,7 +71,7 @@ namespace Cook.View
                 string req11 = "select sum(nbRecette) from commande_has_recette where Recette_idRecette=" + idRct + "  ;";
 
                 object nbV = Tools.Selection(req11, c)[0][0];
-                if (nbV == null)
+                if (nbV is DBNull)
                 {
                     nbV = 0;
                 }
@@ -135,10 +135,6 @@ namespace Cook.View
                 
                 string req3 ="select idRecette from recette where Nom='" + Rechercher.PageRechercher.titres[k] + "';";
                 string idRct= Tools.Selection(req3, c)[0][0].ToString();
-
-
-                
-               
 
 
                 string req4 = "insert into commande_has_recette values(" + idCmd + "," + idRct + "," + Rechercher.PageRechercher.qts[k] + " );";

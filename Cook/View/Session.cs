@@ -75,6 +75,12 @@ namespace Cook.View
             
             MySqlConnection c = Tools.GetConnexion();
             res=Tools.Commande(req, c);
+            if (this.Cdr && res)
+            {
+                string req1="UPDATE cdr SET solde="+this.solde+";";
+                res = Tools.Commande(req1, c);
+            }
+
             c.Close();
             return res;
         }
