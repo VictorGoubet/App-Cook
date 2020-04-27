@@ -16,10 +16,10 @@
                 <RowDefinition Height="60*"/>
                 <RowDefinition Height="220*"/>
             </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Board" FontFamily="helvetica" FontSize="50" Opacity="0.9" Margin="0 0 0 40"  Foreground="White"  />
+            <TextBlock HorizontalAlignment="Center"  Text="Board" FontFamily="helvetica" FontSize="50" Opacity="0.9" Margin="0 20 0 40"  Foreground="White"  />
 
 
-            <Border Width="500" Height="150" Background="White" CornerRadius="8" Grid.Row="1" Margin="0 0 0 40" >
+            <Border VerticalAlignment="Top" Width="450" Height="150" Background="White" CornerRadius="8" Grid.Row="1" Margin="120 0 0 40" >
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" Opacity="0.1" Direction="260"/>
                 </Border.Effect>
@@ -48,6 +48,15 @@
 
                 </Grid>
 
+
+
+            </Border>
+            <Border Width="120" Height="150" Background="White" VerticalAlignment="Top" CornerRadius="8" Grid.Row="1" HorizontalAlignment="Left"  Margin="60 0 0 30" >
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" Opacity="0.1" Direction="260"/>
+                </Border.Effect>
+
+                <StackPanel x:Name="RctCdr" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
 
             </Border>

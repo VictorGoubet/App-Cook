@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
@@ -28,22 +29,44 @@ namespace Cook.View
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             //On récupére les cdr d'or/d'argent et les 5 meilleurs recettes
-            //THOMAS
-
-            //Il faut mettre les données récupérées sous cette forme :
 
             //Pour les cdr d'or et d'argent :
-            List<string> List_prenom = new List<string> { "Baptiste", "Daniel" };
-            List<string> List_nom = new List<string> { "Praud", "Gaumont"};
-            List<int> List_nbCmd = new List<int> {24, 15 };
+            List<string> List_prenom = new List<string>();
+            List<string> List_nom = new List<string>();
+            List<int> List_nbCmd = new List<int>();
 
-            //Pour les 5 recettes : (ici j'en est mis que 2 j'avais la flm) 
+            MySqlConnection c = Tools.GetConnexion();
+            string req = "select client.nom,client.prenom,sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette=recette.idRecette join cdr on cdr.idCDR=recette.CDR_idCDR join client on client.idClient=cdr.Client_idClient join commande on commande.idCommande=cr.Commande_idCommande where DATEDIFF(NOW(), commande.Date)< 8 group by idCDR having sum(cr.nbRecette) >= ALL (select sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette = recette.idRecette join cdr on cdr.idCDR = recette.CDR_idCDR join commande on commande.idCommande = cr.Commande_idCommande where DATEDIFF(NOW(), commande.Date) < 8 group by idCDR);";
+            List<List<object>> res=Tools.Selection(req, c);
+            List_prenom.Add(res[0][1].ToString());
+            List_nom.Add(res[0][0].ToString());
+            List_nbCmd.Add(Convert.ToInt32(res[0][2]));
 
-            List<string> urlListe = new List<string> { "https://cache.marieclaire.fr/data/photo/w1000_c17/cuisine/4r/tartiflette-express-au-reblochon-1.jpg", "https://cac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fcac.2F2020.2F02.2F13.2Ff5f778dd-ad0a-421b-a35d-bad4e518a612.2Ejpeg/750x562/quality/80/crop-from/center/cr/wqkgR2luZXQtRHJpbiAvIFBob3RvY3Vpc2luZSAvIEN1aXNpbmUgQWN0dWVsbGU%3D/la-poule-au-riz-de-la-mere-michele.jpeg" };
-            List<string> DescListe = new List<string> { "La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde La tartiflette est une recette de cuisine inspirée de recettes traditionnelles de cuisine savoyarde", "La poule au pot est une recette de cuisine traditionnelle de la cuisine française, ainsi qu'une spécialité de la cuisine gersoise et du Béarn, à base de pot-au-feu ou potée de poule cuite au bouillon, dans une cocotte, avec des légumes." };
-            List<string> TitleListe = new List<string> { "Tartiflette", "Poule au riz" };
-            List<string> TypeListe = new List<string> { "Plat", "Poté" };
-            List<double> PrixListe = new List<double> { 18.50, 25.40 };
+            req = "select client.nom,client.prenom,sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette=recette.idRecette join cdr on cdr.idCDR=recette.CDR_idCDR join client on client.idClient=cdr.Client_idClient group by idCDR having sum(cr.nbRecette) >= ALL (select sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette = recette.idRecette join cdr on cdr.idCDR = recette.CDR_idCDR group by idCDR);";
+            res = Tools.Selection(req, c);
+            List_prenom.Add(res[0][1].ToString());
+            List_nom.Add(res[0][0].ToString());
+            List_nbCmd.Add(Convert.ToInt32(res[0][2]));
+
+            req = "select recette.nom from recette join cdr on cdr.idCDR=recette.CDR_idCDR join commande_has_recette as cr on cr.Recette_idRecette=recette.idRecette  where idCDR = 5 group by idRecette order by sum(cr.nbRecette) limit 5;";
+            res = Tools.Selection(req, c);
+            foreach (List<object> ligne in res)
+            {
+                TextBlock t = new TextBlock();
+                t.FontFamily = new FontFamily("Helvetica");
+                t.FontSize = 15;
+                t.Margin = new Thickness(0, 0, 0, 5);
+                t.Text = ligne[0].ToString();
+                RctCdr.Children.Add(t);
+            }
+
+            //Pour les 5 recettes 
+
+            List<string> urlListe = new List<string>();
+            List<string> DescListe = new List<string>();
+            List<string> TitleListe = new List<string>();
+            List<string> TypeListe = new List<string>();
+            List<double> PrixListe = new List<double>();
 
             #region listePrdts
             List<string> PrdtTartiflette = new List<string> { "Pomme de terre", "Reblochons", "Lardons", "Creme", "Oignons" };
@@ -65,6 +88,36 @@ namespace Cook.View
             List<List<double>> QtListe = new List<List<double>> { QtPrdtTartiflette, QtrdtPoule };
             List<List<string>> UnListe = new List<List<string>> { UnPrdtTartiflette, UnrdtPoule };
 
+            req = "select recette.*,sum(cr.nbRecette) from recette join commande_has_recette as cr on cr.Recette_idRecette=recette.idRecette group by idRecette order by sum(cr.nbRecette) desc limit 5;";
+            res = Tools.Selection(req, c);
+
+            foreach (List<object> ligne in res)
+            {
+                TitleListe.Add(ligne[1].ToString());
+                DescListe.Add(ligne[2].ToString());
+                PrixListe.Add(Convert.ToDouble(ligne[3]));
+                TypeListe.Add(ligne[5].ToString());
+                urlListe.Add(ligne[4].ToString());
+
+                //On ajoute les produits correspondants :
+                string reqP = "select p.Nom,p.Unite,rp.Quantite from produit as p join recette_has_produit as rp on p.idProduit=rp.Produit_idProduit join recette as r on rp.Recette_idRecette=r.idRecette where r.idRecette=" + ligne[0] + ";";
+                List<List<object>> resP = Tools.Selection(reqP, c);
+
+                List<string> sousListePrdt = new List<string>();
+                List<double> sousListeQtt = new List<double>();
+                List<string> sousListeUn = new List<string>();
+
+                foreach (List<object> produit in resP)
+                {
+                    sousListePrdt.Add(produit[0].ToString());
+                    sousListeQtt.Add(Convert.ToDouble(produit[2]));
+                    sousListeUn.Add(produit[1].ToString());
+
+                }
+                PrdtListe.Add(sousListePrdt);
+                QtListe.Add(sousListeQtt);
+                UnListe.Add(sousListeUn);
+            }
 
             //On affiche les CDR d'or et d'argent :
 
