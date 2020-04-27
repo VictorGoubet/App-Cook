@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,17 +31,41 @@ namespace Cook.View
             //On récupére la liste des chefs :
             //THOMAS
 
+            MySqlConnection c = Tools.GetConnexion();
+            string req1 = "select * from client cl, cdr cr where cl.idCLient=cr.Client_idClient;";
+            List<List<object>> res = Tools.Selection(req1, c);
+            string req2 = "Select COUNT(idRecette) from recette group by CDR_idCDR;";
+            List<List<object>> res2 = Tools.Selection(req2, c);
+            c.Close();
+
             //On met les données sous cette forme :
 
-            //Pour l'instant on reprend notre exemple des 3 recettes:
-            List<string> List_prenom= new List<string> {"Jacque","Daniel","Baptiste"};
-            List<string> List_nom=new List<string>{"DelaVigne","Gaumont","Praud"};          
-            List<string> List_numTel=new List<string>{"0655845865","0785652536","0125252569"};
-            List<string> List_IdUser=new List<string>{"FEGUEG543", "EFIEFG548" , "459FEG548" };
-            List<string> List_IdCDR=new List<string>{ "855GUEFEF" ,"NYRY555F2" , "25GRE0ECV" };            
-            List<string> List_Adresse=new List<string>{"34 rue Jules Verne 92300 Levallois-Perret","40 rue des colombes AVAL","56 boulevard du general masson NANTES"};;
-            List<string> List_AdrMail=new List<string> {"jacquedelavigne@yahoo.com", "dadamont@orangefr", "praudo@gmailcom" };
-            List<int>    List_nbRecette =new List<int> {4,5,26};
+            List<string> List_prenom= new List<string> ();
+            List<string> List_nom=new List<string>();          
+            List<string> List_numTel=new List<string>();
+            List<string> List_IdUser=new List<string>();
+            List<string> List_IdCDR=new List<string>();            
+            List<string> List_Adresse=new List<string>();;
+            List<string> List_AdrMail=new List<string> ();
+            List<int>    List_nbRecette =new List<int> ();
+
+            foreach (List<object> ligne in res)
+            {
+                List_prenom.Add(ligne[3].ToString());
+                List_nom.Add(ligne[2].ToString());
+                List_numTel.Add(ligne[1].ToString());
+                List_IdUser.Add(ligne[6].ToString());
+                List_IdCDR.Add(ligne[9].ToString());
+                List_Adresse.Add(ligne[4].ToString());
+                List_AdrMail.Add(ligne[7].ToString());
+                
+            }
+            foreach(List<object> ligne in res2)
+            {
+                List_nbRecette.Add(Convert.ToInt32(ligne[0]));
+            }
+
+
 
             Pannel_Del_Cdr.Children.Clear();
             //On créé les controle ModelCDR et on les affiche dans un scrollViewer
