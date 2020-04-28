@@ -34,9 +34,8 @@ namespace Cook.View
             MySqlConnection c = Tools.GetConnexion();
             string req1 = "select * from client cl, cdr cr where cl.idCLient=cr.Client_idClient;";
             List<List<object>> res = Tools.Selection(req1, c);
-            string req2 = "Select COUNT(idRecette) from recette group by CDR_idCDR;";
-            List<List<object>> res2 = Tools.Selection(req2, c);
-            c.Close();
+            
+            
 
             //On met les données sous cette forme :
 
@@ -47,7 +46,6 @@ namespace Cook.View
             List<string> List_IdCDR=new List<string>();            
             List<string> List_Adresse=new List<string>();;
             List<string> List_AdrMail=new List<string> ();
-            List<int>    List_nbRecette =new List<int> ();
 
             foreach (List<object> ligne in res)
             {
@@ -60,23 +58,26 @@ namespace Cook.View
                 List_AdrMail.Add(ligne[7].ToString());
                 
             }
-            foreach(List<object> ligne in res2)
-            {
-                List_nbRecette.Add(Convert.ToInt32(ligne[0]));
-            }
+
 
 
 
             Pannel_Del_Cdr.Children.Clear();
             //On créé les controle ModelCDR et on les affiche dans un scrollViewer
+
+            
             for (int k = 0; k < List_prenom.Count(); k++)
             {
-                ModelCDR item = new ModelCDR(List_prenom[k], List_nom[k], List_numTel[k], List_IdUser[k], List_IdCDR[k], List_Adresse[k], List_AdrMail[k], List_nbRecette[k]);
+                string req2 = "Select count(*) from recette where CDR_idCDR="+ List_IdCDR[k] + ";";
+                int nRecette = Convert.ToInt32(Tools.Selection(req2, c)[0][0]);
+
+                ModelCDR item = new ModelCDR(List_prenom[k], List_nom[k], List_numTel[k], List_IdUser[k], List_IdCDR[k], List_Adresse[k], List_AdrMail[k], nRecette);
                 item.Margin = new Thickness(0, 0, 0, 10);
                 item.Width = 600;
                 item.Height = 100;
                 Pannel_Del_Cdr.Children.Add(item);
             }
+            c.Close();
         }
     }
 }

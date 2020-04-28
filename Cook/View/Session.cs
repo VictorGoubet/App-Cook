@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 
+
 namespace Cook.View
 {
     public class Session
@@ -79,14 +80,28 @@ namespace Cook.View
             
             MySqlConnection c = Tools.GetConnexion();
             res=Tools.Commande(req, c);
-            if (this.Cdr && res)
-            {
-                string req1="UPDATE cdr SET solde="+this.solde+ " where idCDR=" + this.IdCDR + ";";
-                res = Tools.Commande(req1, c);
-            }
 
             c.Close();
             return res;
+        }
+
+        public void UpdtSolde()
+        {
+
+            MySqlConnection c = Tools.GetConnexion();
+            
+            string req = "UPDATE cdr set solde=" + this.Solde.ToString().Replace(',','.') + " where idCDR="+this.IdCDR+";";
+            Tools.Commande(req, c);
+            c.Close();
+        }
+
+        public void GetandSetSolde()
+        {
+
+            MySqlConnection c = Tools.GetConnexion();
+            List<List<object>> res2 = Tools.Selection("select solde from cdr join client on cdr.Client_idClient=client.idClient where pseudo='" + this.pseudo + "';",c);
+            this.solde = Convert.ToDouble(res2[0][0]);
+            c.Close();
         }
 
         

@@ -37,10 +37,20 @@ namespace Cook.View
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Rechercher.PageRechercher.titres != null && Rechercher.PageRechercher.titres.Count() > 0)
+
+            try
             {
-                AffichageRecap(Rechercher.PageRechercher.titres, Rechercher.PageRechercher.prixs, Rechercher.PageRechercher.qts, Rechercher.PageRechercher.urls);
+                if (Rechercher.PageRechercher.titres != null && Rechercher.PageRechercher.titres.Count() > 0)
+                {
+                    AffichageRecap(Rechercher.PageRechercher.titres, Rechercher.PageRechercher.prixs, Rechercher.PageRechercher.qts, Rechercher.PageRechercher.urls);
+                }
+
             }
+            catch
+            {
+                MessageBox.Show("Erreure lors du chargement de la page");
+            }
+            
 
         }
 
@@ -73,17 +83,23 @@ namespace Cook.View
 
         public void Btn_DelPanier_Click(object sender, RoutedEventArgs e)
         {
-            //On annule le panier :
+            //On annule la commande :
 
+            //On nettoie le contenue de la page panier
             Stck_Rcp.Children.Clear();
+
+            //On clear le contenue du panier :
             Rechercher.PageRechercher.titres.Clear();
             Rechercher.PageRechercher.prixs.Clear();
             Rechercher.PageRechercher.qts.Clear();
             Rechercher.PageRechercher.urls.Clear();
+
+            //On reset le prix total
             prixTotal = 0;
             PrxTT.Text = "Total : 0 Ck";
-            Rechercher.PageRechercher = null;
-            MainWindow.sessionCourante.UpdateBdd();
+
+            //On debloque le contenue de la page rechercher
+            Rechercher.PageRechercher = new Rechercher();
 
         }
 
@@ -117,11 +133,13 @@ namespace Cook.View
                 Tools.Commande(req4, c);
 
             }
-            
-
 
             c.Close();
-            
+            MainWindow.sessionCourante.GetandSetSolde();
+            MainWindow.sessionCourante.Solde = MainWindow.sessionCourante.Solde- this.prixTotal;
+            MainWindow.sessionCourante.UpdtSolde();
+
+
             //On supprime le panier :
             Btn_DelPanier_Click(sender, e);
         }

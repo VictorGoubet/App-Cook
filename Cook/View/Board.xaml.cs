@@ -37,11 +37,12 @@ namespace Cook.View
 
 
             MySqlConnection c = Tools.GetConnexion();
-            string req = "select client.nom,client.prenom,sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette=recette.idRecette join cdr on cdr.idCDR=recette.CDR_idCDR join client on client.idClient=cdr.Client_idClient group by idCDR having sum(cr.nbRecette) >= ALL (select sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette = recette.idRecette join cdr on cdr.idCDR = recette.CDR_idCDR group by idCDR);";
+            string req = "select client.nom,client.prenom,sum(cr.nbRecette),idCDR from commande_has_recette as cr join recette on cr.Recette_idRecette=recette.idRecette join cdr on cdr.idCDR=recette.CDR_idCDR join client on client.idClient=cdr.Client_idClient group by idCDR having sum(cr.nbRecette) >= ALL (select sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette = recette.idRecette join cdr on cdr.idCDR = recette.CDR_idCDR group by idCDR);";
             List<List<object>> res = Tools.Selection(req, c);
             List_prenom.Add(res[0][1].ToString());
             List_nom.Add(res[0][0].ToString());
             List_nbCmd.Add(Convert.ToInt32(res[0][2]));
+            string idGoldenCDR = res[0][3].ToString();
 
             
             req = "select client.nom,client.prenom,sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette=recette.idRecette join cdr on cdr.idCDR=recette.CDR_idCDR join client on client.idClient=cdr.Client_idClient join commande on commande.idCommande=cr.Commande_idCommande where DATEDIFF(NOW(), commande.Date)< 8 group by idCDR having sum(cr.nbRecette) >= ALL (select sum(cr.nbRecette) from commande_has_recette as cr join recette on cr.Recette_idRecette = recette.idRecette join cdr on cdr.idCDR = recette.CDR_idCDR join commande on commande.idCommande = cr.Commande_idCommande where DATEDIFF(NOW(), commande.Date) < 8 group by idCDR);";
@@ -50,7 +51,7 @@ namespace Cook.View
             List_nom.Add(res[0][0].ToString());
             List_nbCmd.Add(Convert.ToInt32(res[0][2]));
 
-            req = "select recette.nom,sum(cr.nbRecette) from recette join cdr on cdr.idCDR=recette.CDR_idCDR join commande_has_recette as cr on cr.Recette_idRecette=recette.idRecette  where idCDR = 5 group by idRecette order by sum(cr.nbRecette) limit 5;";
+            req = "select recette.nom,sum(cr.nbRecette) from recette join cdr on cdr.idCDR=recette.CDR_idCDR join commande_has_recette as cr on cr.Recette_idRecette=recette.idRecette  where idCDR = '"+ idGoldenCDR + "' group by idRecette order by sum(cr.nbRecette) limit 5;";
             res = Tools.Selection(req, c);
             foreach (List<object> ligne in res)
             {
@@ -58,7 +59,8 @@ namespace Cook.View
                 t.FontFamily = new FontFamily("Helvetica");
                 t.FontSize = 15;
                 t.Margin = new Thickness(0, 0, 0, 5);
-                t.Text = ligne[0].ToString()+" x"+ ligne[1].ToString();
+                t.Text ="•"+ ligne[0].ToString()+" x"+ ligne[1].ToString();
+                t.TextWrapping = TextWrapping.Wrap;
                 RctCdr.Children.Add(t);
             }
 
