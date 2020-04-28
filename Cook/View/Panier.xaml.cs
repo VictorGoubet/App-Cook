@@ -112,9 +112,11 @@ namespace Cook.View
 
             DateTime date = DateTime.Now;
 
+            //On créé la commande
             string req1 = "insert into commande (Date,Montant,Client_idClient) values('" + date.ToString("yyyy-MM-dd") + "','" + prixTotal.ToString().Replace(',','.') + "', " + MainWindow.sessionCourante.Id + ");";
             Tools.Commande(req1, c);
 
+            //On récupére son id
             string req2 = "select MAX(idCommande) from commande;";
             string idCmd = Tools.Selection(req2, c)[0][0].ToString();
 

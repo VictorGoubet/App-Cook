@@ -13,11 +13,14 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.1" Direction="260"/>
             </Border.Effect>
-            <Grid Margin="10">
+            <Grid Margin="10" x:Name="controlRecette">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
+
+                <Image Name="Epuise" Source="/Cook;component/soldout.png" Grid.ColumnSpan="2" Width="150" Height="150" Visibility="Hidden" HorizontalAlignment="Center" Margin="0 0 70 40"  Panel.ZIndex="1"/>
+
                 <StackPanel Margin="10 0 10 0">
                     <TextBlock x:Name="Title_Rct" FontWeight="SemiBold" Foreground="#bfaae6" FontSize="20" FontFamily="Helvetica" Margin="10 10 0 0"/>
                     <TextBlock x:Name="Description_Rct" Margin="0 20 0 0" TextWrapping="Wrap" Height="90" TextAlignment="Justify"/>
@@ -33,8 +36,9 @@
                             <materialDesign:PackIcon Kind="Add" Width="20" Height="20"  Foreground="#bfaae6" VerticalAlignment="Center"/>
                         </Button>
                         <TextBlock x:Name="Prix" FontSize="15" VerticalAlignment="Center" Margin="0 0 20 0" Foreground="#bfaae6" FontFamily="Helvetica" HorizontalAlignment="Center"/>
+
                         
-                        
+
 
 
                     </Grid>

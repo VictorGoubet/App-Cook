@@ -64,7 +64,8 @@ namespace Cook.View
             }
 
             //On déconnecte l'utilisateur :
-            //THOMAS (jsp si il faut faire quelquechose de special)
+            MainWindow.sessionCourante = null;
+            Rechercher.PageRechercher = null;
 
             ///On retourne en arrière en affichant la page des choix Login/Register
             Application.Current.MainWindow.DataContext = Choice.vChoice;

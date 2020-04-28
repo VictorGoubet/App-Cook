@@ -50,54 +50,54 @@ insert into fournisseur(Nom,NumeroTel) values ("SaucageParty","0240560571");
 
 -- INSERTION PRODUITS
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Poulet","Viande","Kg",0,100,0,6);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Curry","Epice","g",0,1000,0,8);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Cumin","Epice","g",0,1000,0,8);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Piment","Epice","g",0,1000,0,8);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Poivre","Epice","g",0,1000,0,8);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Sel","Epice","g",0,1000,0,8);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Crème fraiche","Produit Laitier","cL",0,1000,0,5);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Oignons","Légume","",0,50,0,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Poulet","Viande","Kg",60,100,100,6);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Curry","Epice","g",500,1000,1000,8);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Cumin","Epice","g",500,1000,1000,8);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Piment","Epice","g",500,1000,1000,8);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Poivre","Epice","g",500,1000,1000,8);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Sel","Epice","g",550,1000,1000,8);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Crème fraiche","Produit Laitier","cL",550,1000,1000,5);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Oignons","Légume","",20,50,50,3);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Moules","Poissons","Kg",0,60,0,4);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pomme de terre","Légume","Kg",0,200,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Echalotte","Légume","",0,40,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Ail","Légume","",0,30,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Vin blanc","Alcool","cL",0,2000,0,9);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Beurre","Produit Laitier","Kg",0,250,0,5);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Moules","Poissons","Kg",0,60,60,4);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pomme de terre","Légume","Kg",150,200,200,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Echalotte","Légume","",25,40,40,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Ail","Légume","",15,30,30,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Vin blanc","Alcool","cL",1000,2000,2000,9);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Beurre","Produit Laitier","Kg",100,250,250,5);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Oeuf","Autre","",0,150,0,6);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Farine","Autre","Kg",0,50,0,7);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Sucre","Autre","Kg",0,50,0,7);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Chocolat","Autre","Kg",0,5,0,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Oeuf","Autre","",75,150,150,6);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Farine","Autre","Kg",30,50,50,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Sucre","Autre","Kg",20,50,50,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Chocolat","Autre","Kg",2,5,5,7);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Persil","Herbe aromatique","g",0,500,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Poivron","Légume","",0,50,0,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Persil","Herbe aromatique","g",200,500,500,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Poivron","Légume","",20,50,50,3);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Tomates","Légume","",0,50,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Concombre","Légume","",0,15,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Basilic","Herbe aromatique","g",0,300,0,3);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pain de mie","Pain","Kg",0,5,0,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Tomates","Légume","",25,50,50,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Concombre","Légume","",7,15,15,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Basilic","Herbe aromatique","g",150,300,300,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pain de mie","Pain","Kg",3,5,5,7);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Viande hachée","viande","Kg",0,50,0,1);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Ketchup","Sauce","cL",0,500,0,10);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Tabasco","Sauce","cL",0,100,0,10);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Moutarde","Sauce","cL",0,100,0,10);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Capre","Légume","g",0,400,0,3);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Viande hachée","viande","Kg",20,50,50,1);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Ketchup","Sauce","cL",300,500,500,10);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Tabasco","Sauce","cL",0,60,100,10);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Moutarde","Sauce","cL",75,100,100,10);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Capre","Légume","g",250,400,400,3);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Lait","Produit Laitier","L",0,100,0,5);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Levure","Autre","g",0,100,0,7);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Sucre glace","Autre","Kg",0,5,0,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Lait","Produit Laitier","L",60,100,100,5);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Levure","Autre","g",50,100,100,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Sucre glace","Autre","Kg",0,3,5,7);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Riz à sushi","Féculent","Kg",0,6,0,2);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Saumon","Poisson","Kg",0,5,0,4);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Wazabi","Sauce","g",0,100,0,10);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Vinaigre de riz","Vinaigre","cL",0,500,0,9);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Riz à sushi","Féculent","Kg",3,6,6,2);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Saumon","Poisson","Kg",3,5,5,4);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Wazabi","Sauce","g",50,100,100,10);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Vinaigre de riz","Vinaigre","cL",300,500,500,9);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Lardons","viande","Kg",0,15,0,1);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Lardons","viande","Kg",7,15,15,1);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pain de campagne","Pain","Kg",0,10,0,7);
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Mozarella","Produit Laitier","g",0,1000,0,5);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pain de campagne","Pain","Kg",5,10,10,7);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Mozarella","Produit Laitier","g",500,1000,1000,5);
 
 
 -- INSERTION PRODUITS/RECETTES
@@ -146,7 +146,7 @@ insert into recette_has_produit values (5,8,1);
 insert into recette_has_produit values (5,15,2);
 insert into recette_has_produit values (5,12,1);
 
-insert into recette_has_produit values (6,25,150);
+insert into recette_has_produit values (6,25,0.15);
 insert into recette_has_produit values (6,26,10);
 insert into recette_has_produit values (6,27,5);
 insert into recette_has_produit values (6,28,15);
@@ -203,5 +203,10 @@ insert into commande_has_recette values(3,8,3);
 -- INSERTION GESTIONNAIRE
 
 insert into gestionnaire values("root","123");
+
+-- UPDATE DATE
+
+UPDATE fournisseur set DateCommande=DATE_SUB(current_date(), INTERVAL 6 DAY);
+UPDATE produit set DateUpdate=DATE_SUB(current_date(), INTERVAL 6 DAY);
 
 

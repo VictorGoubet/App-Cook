@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace Cook.View
 {
@@ -24,15 +25,19 @@ namespace Cook.View
         string url;
         string description;
         double prixRct;
-        bool gris;
+        string id;
+        List<double> Liste_qtNec;
+        List<double> Liste_qtActu;
 
-        public ModelRecette(string url, string description, string title,double prixRct,bool gris)
+        public ModelRecette(string url, string description, string title,double prixRct,string id)
         {
             this.description = description;
             this.url = url;
             this.title = title;
             this.prixRct = prixRct;
-            this.gris = gris;
+            this.id = id;
+            this.Liste_qtNec = new List<double>();
+            this.Liste_qtActu = new List<double>();
 
             InitializeComponent();
             
@@ -56,18 +61,59 @@ namespace Cook.View
             Description_Rct.Text = this.description;
             Prix.Text = this.prixRct.ToString() + " Ck";
 
+            //----------VERIFICATION QUANTITE SUFFISANTE-----
+            MySqlConnection c = Tools.GetConnexion();
+            string req2 = "select rp.Quantite,p.StockActuel from produit as p join recette_has_produit as rp on p.idProduit=rp.Produit_idProduit where rp.Recette_idRecette=" +this.id + ";";
+            List<List<object>> res2 = Tools.Selection(req2, c);
+
+            bool gris = false;
+            foreach (List<object> produit in res2)
+            {
+                double qtNec = Convert.ToDouble(produit[0].ToString().Replace(".", ","));
+                double qtActu = Convert.ToDouble(produit[1].ToString().Replace(".", ","));
+                Liste_qtActu.Add(qtActu);
+                Liste_qtNec.Add(qtNec);
+                if (qtActu - qtNec < 0)
+                {
+                    gris = true;
+                    break;
+                }
+            }
+
+            c.Close();
+
             if (gris)
             {
+                Epuise.Visibility = Visibility.Visible;
                 this.Opacity = 0.5;
                 this.IsEnabled = false;
+                
             }
+
+            //----------
 
         }
 
         private void Btn_PLus_Click(object sender, RoutedEventArgs e)
         {
-            //On augmente le compteur de 1
-            compteur.Text = Convert.ToString(Convert.ToInt32(compteur.Text) + 1);
+
+            //On va verifier si il reste assez d'ingredient pour ajouter encore une recette :
+            bool possible = true;
+            int n = Convert.ToInt32(compteur.Text);
+            for (int k = 0; k < this.Liste_qtNec.Count(); k++)
+            {
+                if (Liste_qtActu[k] - (n+1) * Liste_qtNec[k]<0)
+                {
+                    possible = false;
+                    break;
+                }
+            }
+            //Si c'est possible on augmente le compteur de 1
+            if (possible)
+            {
+                compteur.Text = Convert.ToString(Convert.ToInt32(compteur.Text) + 1);
+            }
+
         }
 
         private void Btn_Moins_Click(object sender, RoutedEventArgs e)
