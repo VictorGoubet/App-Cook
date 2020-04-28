@@ -71,30 +71,41 @@ namespace Cook.View
 
         public static List<List<object>> Selection(string req,MySqlConnection c)
         {
-            MySqlCommand cmd = c.CreateCommand();
-            cmd.CommandText = req;
-            MySqlDataReader reader = cmd.ExecuteReader();
-
             List<List<object>> res = new List<List<object>>();
-
-            while (reader.Read())
+            try
             {
-                List<object> ligne = new List<object>();
-                for (int i = 0; i < reader.FieldCount; i++)
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = req;
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                
+
+                while (reader.Read())
                 {
-                    object value = reader.GetValue(i);
-                    ligne.Add(value);
+                    List<object> ligne = new List<object>();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        object value = reader.GetValue(i);
+                        ligne.Add(value);
+                    }
+                    res.Add(ligne);
                 }
-                res.Add(ligne);
+
+
+                reader.Close();
+                cmd.Dispose();
+                
+
             }
-
-
-            reader.Close();
-            cmd.Dispose();
-
+            catch
+            {
+                MessageBox.Show("Erreure lors de la selection");
+            }
             return res;
 
-          
+
+
+
 
         }
 

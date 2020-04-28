@@ -24,13 +24,15 @@ namespace Cook.View
         string url;
         string description;
         double prixRct;
+        bool gris;
 
-        public ModelRecette(string url, string description, string title,double prixRct)
+        public ModelRecette(string url, string description, string title,double prixRct,bool gris)
         {
             this.description = description;
             this.url = url;
             this.title = title;
             this.prixRct = prixRct;
+            this.gris = gris;
 
             InitializeComponent();
             
@@ -53,6 +55,12 @@ namespace Cook.View
             Title_Rct.Text = this.title;
             Description_Rct.Text = this.description;
             Prix.Text = this.prixRct.ToString() + " Ck";
+
+            if (gris)
+            {
+                this.Opacity = 0.5;
+                this.IsEnabled = false;
+            }
 
         }
 

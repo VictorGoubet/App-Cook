@@ -107,12 +107,10 @@ namespace Cook.View
         {
 
             //On prend en compte la commande: (régles detaillé dans le sujet → augmentation du prix etc )
-            //THOMAS
 
             MySqlConnection c = Tools.GetConnexion();
 
             DateTime date = DateTime.Now;
-
 
             string req1 = "insert into commande (Date,Montant,Client_idClient) values('" + date.ToString("yyyy-MM-dd") + "','" + prixTotal.ToString().Replace(',','.') + "', " + MainWindow.sessionCourante.Id + ");";
             Tools.Commande(req1, c);
@@ -124,20 +122,46 @@ namespace Cook.View
 
             for (int k = 0; k < Rechercher.PageRechercher.titres.Count(); k++)
             {
-                
+                //On récupére l'id de la recette
                 string req3 ="select idRecette from recette where Nom='" + Rechercher.PageRechercher.titres[k] + "';";
                 string idRct= Tools.Selection(req3, c)[0][0].ToString();
 
-
+                //On créé la commande 
                 string req4 = "insert into commande_has_recette values(" + idCmd + "," + idRct + "," + Rechercher.PageRechercher.qts[k] + " );";
                 Tools.Commande(req4, c);
+
+                //On reduit les stocks :
+
+                //On récupére l'id et la quantité de chaque produit présent dans la recette
+                string reqP = "select p.idProduit,rp.Quantite from produit as p join recette_has_produit as rp on p.idProduit=rp.Produit_idProduit where rp.Recette_idRecette=" + idRct+ ";";
+                List<List<object>> resP = Tools.Selection(reqP, c);
+
+
+                foreach (List<object> produit in resP)
+                {
+                    string qtNecessaire = (Rechercher.PageRechercher.qts[k] * Convert.ToDouble(produit[1].ToString().Replace(".", ","))).ToString().Replace(",", ".");
+
+                    string reqRed = "update produit set stockActuel=stockActuel-"+ qtNecessaire+" where idProduit="+produit[0]+";";
+                    Tools.Commande(reqRed, c);
+
+                }
+
+
 
             }
 
             c.Close();
+            //On met à jour le solde qui a changé grace au trigger en cas de gain d'argent
             MainWindow.sessionCourante.GetandSetSolde();
-            MainWindow.sessionCourante.Solde = MainWindow.sessionCourante.Solde- this.prixTotal;
-            MainWindow.sessionCourante.UpdtSolde();
+
+            //Puis on debite le commpte 
+            if(MainWindow.sessionCourante.Cdr && MainWindow.sessionCourante.Solde - this.prixTotal >= 0)
+            {
+                MainWindow.sessionCourante.Solde = MainWindow.sessionCourante.Solde - this.prixTotal;
+                MainWindow.sessionCourante.UpdtSolde();
+
+            }
+            
 
 
             //On supprime le panier :

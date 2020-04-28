@@ -27,6 +27,7 @@ namespace Cook.View
         public List<double> prixs;
         public List<int> qts;
         public List<string> urls;
+        bool gris;
         
 
         public Rechercher()
@@ -37,6 +38,7 @@ namespace Cook.View
             this.prixs = new List<double>();
             this.qts = new List<int>();
             this.urls = new List<string>();
+            this.gris = true;
             PageRechercher = this;
 
             //On remplis l'adresse avec celle de la session courante :
@@ -52,6 +54,7 @@ namespace Cook.View
             List<string> DescListe = new List<string>();
             List<string> TitleListe = new List<string>();
             List<double> PrixListe = new List<double>();
+            
 
             foreach (List<object> ligne in res)
             {
@@ -59,6 +62,19 @@ namespace Cook.View
                 DescListe.Add(ligne[2].ToString());
                 PrixListe.Add(Convert.ToDouble(ligne[3]));
                 urlListe.Add(ligne[4].ToString());
+
+                string req2="select rp.Quantite,p.StockActuel from produit as p join recette_has_produit as rp on p.idProduit=rp.Produit_idProduit where rp.Recette_idRecette=" + ligne[0].ToString() + ";";
+                List <List<object>> res2 = Tools.Selection(req2, c);
+                foreach(List <object> produit in res2)
+                {
+                    double qtNec = Convert.ToDouble(produit[0].ToString().Replace(".", ","));
+                    double qtActu = Convert.ToDouble(produit[1].ToString().Replace(".", ","));
+                    if (qtNec - qtActu < 0)
+                    {
+                        this.gris = true;
+                        break;
+                    }
+                }
             }
 
             c.Close();
@@ -91,8 +107,8 @@ namespace Cook.View
             for (int k = 0; k < urlListe.Count(); k++)
             {
 
-
-                ModelRecette rct = new ModelRecette(urlListe[k], DescListe[k], TitleListe[k], PrixListe[k]);
+                MessageBox.Show(gris.ToString());
+                ModelRecette rct = new ModelRecette(urlListe[k], DescListe[k], TitleListe[k], PrixListe[k],gris);
                 rct.Width = 600;
                 rct.Height = 200;
                 rct.Margin = new Thickness(0, 0, 0, 50);
