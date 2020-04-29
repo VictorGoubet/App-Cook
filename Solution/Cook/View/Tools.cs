@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace Cook.View
 {
-    abstract class Tools
+    public abstract class Tools
     {
 
 
