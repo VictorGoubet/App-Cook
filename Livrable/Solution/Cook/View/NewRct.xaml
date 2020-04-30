@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Cook.View.NewRct"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Cook.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="700"
+             Loaded="UserControl_Loaded">
+    
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Center" Text="Ajouter une recette" FontFamily="helvetica" FontSize="50" Opacity="0.9"  Foreground="White" Margin="0 30 0 0"/>
+
+        <StackPanel  Orientation="Vertical" Width="150" VerticalAlignment="Center"  Grid.Column="0"  >
+
+            <StackPanel Margin="0 50 0 0" >
+                <TextBox Style = "{StaticResource placeHolder}" x:Name="Input_Titre" Margin="2" Tag="Titre"/>
+                <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"  />
+
+            </StackPanel>
+
+
+            <StackPanel Margin="0 50 0 0" >
+                <TextBox Style = "{StaticResource placeHolder}" Margin="2" Tag="Type" x:Name="Input_Type"/>
+                <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"  />
+            </StackPanel>
+
+            <StackPanel Margin="0 50 0 0" >
+                <TextBox Style = "{StaticResource placeHolder}" Margin="2" Tag="Url" x:Name="Input_Url"/>
+                <Border Background="#bfaae6" Width="{Binding Path=ActualWidth}" Height="2"  />
+            </StackPanel>
+
+            <StackPanel Margin="0 50 0 0" >
+                <TextBox Style = "{StaticResource placeHolder}" Margin="2" Tag="Prix" Width="50" HorizontalAlignment="Left" x:Name="Input_Prix"/>
+                <Border Background="#bfaae6" Width="50" HorizontalAlignment="Left" Height="2" />
+            </StackPanel>
+        </StackPanel>
+
+
+        <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.ColumnSpan="2" Grid.Column="1">
+            <TextBlock  Text="Description :" Foreground="#bfaae6" FontSize="18" Margin="5"/>
+            <Border CornerRadius="8"  Width="400" Height="100" Margin="2"  Background="White">
+                <TextBox Foreground="#bfaae6" AcceptsReturn="True"  x:Name="Input_Desc" Opacity="1" TextWrapping="Wrap" Width="390" Height="90" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0"/>
+            </Border>
+            
+        </StackPanel>
+
+        <ComboBox x:Name="ListePrdt"  Grid.Column="1" VerticalAlignment="Bottom" Margin="30 0 0 80"/>
+
+        <StackPanel VerticalAlignment="Bottom" Margin="30 0 0 80" Grid.Column="2" >
+            <TextBox Style = "{StaticResource placeHolder}" Margin="2" x:Name="Qt" Tag="Qt" Width="50" HorizontalAlignment="Left" />
+            <Border Background="#bfaae6" Width="50" HorizontalAlignment="Left" Height="2"/>
+        </StackPanel>
+
+        <Button x:Name="Btn_Add_Prdt" Width="40" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Margin="40 0 0 70" Click="Btn_Add_Prdt_Click" Template="{DynamicResource BtnNav}"  >
+            <materialDesign:PackIcon Kind="Add" Width="35" Height="40"  Foreground="#bfaae6" />
+        </Button>
+
+
+        <Button x:Name="Btn_Ajouter" Click="Btn_Ajouter_Click" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 20"  Width="100" Height="30" FontWeight="Bold" Content="Ajouter" Template="{DynamicResource BtnClr}"/>
+
+
+
+
+    </Grid>
+</UserControl>

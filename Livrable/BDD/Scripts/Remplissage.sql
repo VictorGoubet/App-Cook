@@ -59,7 +59,7 @@ insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseu
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Crème fraiche","Produit Laitier","cL",550,1000,1000,5);
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Oignons","Légume","",20,50,50,3);
 
-insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Moules","Poissons","Kg",0,60,60,4);
+insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Moules","Poissons","Kg",30,60,60,4);
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Pomme de terre","Légume","Kg",150,200,200,3);
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Echalotte","Légume","",25,40,40,3);
 insert into produit(Nom,Categorie,Unite,StockMin,StockMax,StockActuel,Fournisseur_idFournisseur) values ("Ail","Légume","",15,30,30,3);

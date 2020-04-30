@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Cook.View.Choice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Cook.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="Transparent">
+
+    <Border CornerRadius="20" Background="Transparent">
+        <Grid>
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                <TextBlock Text="Bienvenue sur" Foreground="White" FontFamily="helvetica" FontSize="50" Margin="0 20 10 0 " />
+                <Border Background="#bfaae6" Width="140" Height="70" CornerRadius="5" Margin="0 15 0 0" Opacity="0.8">
+                    <TextBlock Foreground="White" Text="Cook" FontSize="50" TextAlignment="Center" FontFamily="helvetica" VerticalAlignment="Center"/>
+                </Border>
+                
+            </WrapPanel>
+
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Margin="0 40 0 0">
+
+                <Button x:Name="Btn_Login" Template="{StaticResource BtnRond}" Content="Login" Width="150" Height="40" FontFamily="helvetica" FontSize="20"  Margin="10" Opacity="0.8" Click="Login_Click"/>
+                <Button x:Name="Btn_Register" Template="{StaticResource BtnRond}" Content="Register" Width="150" Height="40" FontFamily="helvetica" FontSize="20"  Margin="10" Opacity="0.8" Click="Register_Click"/>
+                
+            </WrapPanel>
+            <Button x:Name="Btn_Test" Template="{StaticResource BtnRond}" VerticalAlignment="Bottom" Content="Demo" Width="150" Height="40" FontFamily="helvetica" FontSize="20"  Margin="40" Opacity="0.8" Click="Btn_Test_Click"/>
+
+        </Grid>
+    </Border>
+    
+</UserControl>
