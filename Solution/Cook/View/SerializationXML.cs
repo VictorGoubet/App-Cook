@@ -106,7 +106,7 @@ namespace Cook.View
 
            
 
-            commandexml.Save("test.xml");
+            commandexml.Save("Commande.xml");
 
 
 
