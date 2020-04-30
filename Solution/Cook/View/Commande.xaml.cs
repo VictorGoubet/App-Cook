@@ -22,11 +22,15 @@ namespace Cook.View
     public partial class Commande : UserControl
     {
 
+
+
+
         public static Commande PageCommande = null;
         DateTime dateCmd;
         public Commande()
         {
             InitializeComponent();
+            //initialise
             PageCommande = this;
         }
 
@@ -34,9 +38,8 @@ namespace Cook.View
         {
             //On  récupére la liste des produits uniques (unic) , leur quantité max/min/actuelle et leurs fournisseur :
 
-
-            //Liste des fournisseurs
             List<string> Liste_fournisseur = new List<string>();
+
 
             //On stock chaque sous listes
             List<List<string>> Liste_Prdt = new List<List<string>>();
@@ -103,6 +106,10 @@ namespace Cook.View
         private void Btn_Send_Cmd_Click(object sender, RoutedEventArgs e)
         {
 
+            List<List<object>> resXML = new List<List<object>>();
+
+           
+
             MySqlConnection c = Tools.GetConnexion();
 
             //Pour chaque fournisseur on met à jour la date de la dernière commande/verification
@@ -128,14 +135,19 @@ namespace Cook.View
                 }
 
                 //On réaprovisionne les stocks :
+
                 double qtActu = Convert.ToDouble(produit[6].ToString().Replace(".", ","));
+                double qtMin = Convert.ToDouble(produit[4].ToString().Replace(".", ","));
                 double qtMax = Convert.ToDouble(produit[5].ToString().Replace(".", ","));
-                double QuantiteRecharge = qtMax - qtActu;
+ 
                
+
                 //si il est necessaire de faire un raprovisionnement alors on met à jour la date de réaprovisionnement de ce produit
-                if (QuantiteRecharge > 0)
+                if (qtActu < qtMin)
                 {
-                    
+
+                    resXML.Add(produit);
+
                     req = "UPDATE produit SET DateUpdate='" + DateTime.Now.ToString("yyyy'-'MM'-'dd") + "';";
                     Tools.Commande(req, c);
                     //On met à jour la quantite
@@ -151,6 +163,8 @@ namespace Cook.View
 
             //On actualise l'affichage :
             UserControl_Loaded(sender, e);
+            SerializationXML cmd = new SerializationXML(resXML);
+            cmd.generateXML();
 
 
         }

@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace Cook.View
 {
-    abstract class Tools
+    public abstract class Tools
     {
 
 
@@ -32,7 +32,7 @@ namespace Cook.View
             {
                 string connexionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=Cook;" +
-                                         "UID=root;PASSWORD=Pluton740@!!;";
+                                         "UID=root;PASSWORD=ks7879;";
 
                 maConnexion = new MySqlConnection(connexionString);
                 maConnexion.Open();
