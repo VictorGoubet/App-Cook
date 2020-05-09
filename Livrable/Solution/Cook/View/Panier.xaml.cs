@@ -153,12 +153,14 @@ namespace Cook.View
             }
 
             c.Close();
-            //On met à jour le solde qui a changé grace au trigger en cas de gain d'argent
-            MainWindow.sessionCourante.GetandSetSolde();
+            
 
             //Puis on debite le commpte 
             if(MainWindow.sessionCourante.Cdr && MainWindow.sessionCourante.Solde - this.prixTotal >= 0)
             {
+                //On met à jour le solde qui a changé grace au trigger en cas de gain d'argent
+                MainWindow.sessionCourante.GetandSetSolde();
+
                 MainWindow.sessionCourante.Solde = MainWindow.sessionCourante.Solde - this.prixTotal;
                 MainWindow.sessionCourante.UpdtSolde();
 
