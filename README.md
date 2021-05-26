@@ -2,4 +2,4 @@
 <center><h3>ESILV - 2020</h3></center>
 
 # Infos
-For mor information please check the pdf report
+For mor informations please check the pdf report (*Rapport/Rapport.pdf*)
